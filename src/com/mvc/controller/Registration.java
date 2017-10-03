@@ -1,4 +1,4 @@
-package com.project;
+package com.mvc.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class HomeLogin
+ * Servlet implementation class Registration
  */
-@WebServlet("/HomeLogin")
-public class HomeLogin extends HttpServlet {
+@WebServlet("/Registration")
+public class Registration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	public String DB_URL = "jdbc:mysql://localhost:3306/SE_PMS";
@@ -24,13 +24,13 @@ public class HomeLogin extends HttpServlet {
 	public String PASS = "Admin123";
 	public Connection conn = null;
 	public Statement stmt = null;
-	public String uName, pass, loginType;
+	public String email, pass, loginType, fName, lName, address, city, zip, state;
 	public ResultSet res = null;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public HomeLogin() {
+	public Registration() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -42,26 +42,38 @@ public class HomeLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Begin");
-
 		try {
-			uName = request.getParameter("username");
+			fName = request.getParameter("firstname");
+			lName = request.getParameter("lastname");
+			email = request.getParameter("email");
 			pass = request.getParameter("password");
+			address = request.getParameter("address");
+			city = request.getParameter("city");
+			state = request.getParameter("state");
+			zip = (String) request.getParameter("zipcode");
 			loginType = request.getParameter("loginType");
+
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 			stmt = conn.createStatement();
-			String sql = "select * from users where(username='" + uName + "'&&password='" + pass + "'&&type='"
-					+ loginType + "')";
-			res = stmt.executeQuery(sql);
-			if (res.next()) {
-				System.out.println("success");
-				request.setAttribute("userName", uName);
-				request.getRequestDispatcher("/parkingOwnerDashboard.jsp").forward(request, response);
-			}
+			if (loginType.equals("owner"))
+				parkingOwner(request, response);
+
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("2nd error");
+		}
+
+	}
+
+	private void parkingOwner(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		String sql = "";
+
+		try {
+			request.setAttribute("userName", fName);
+			request.getRequestDispatcher("/parkingOwnerDashboard.jsp").forward(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
