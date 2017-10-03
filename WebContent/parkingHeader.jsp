@@ -59,12 +59,12 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li class="active"><a href="#"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li><a href="#"><i class="fa fa-address-card"></i><span>Edit Profile</span></a></li>
+        <li class="active"><a href="parkingOwnerDashboard.jsp"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
+        <li><a href="profiledetails.jsp"><i class="fa fa-address-card"></i><span>Edit Profile</span></a></li>
         <li><a href="#"><i class="fa fa-thumb-tack"></i><span>Change Password</span></a> </li>
         <li><a href="#"><i class="fa fa-braille"></i><span>Parking Spaces</span></a> </li>
          <li><a href="#"><i class="fa fa-credit-card"></i><span>Bookings</span></a> </li>
-        <li><a href="#"><i class="fa fa-user"></i><span>Anonymous User</span></a> </li>
+        <li><a href="manageAnonymousUser.jsp"><i class="fa fa-user"></i><span>Anonymous User</span></a> </li>
       </ul>
     </div>
     <!-- /container --> 

@@ -57,7 +57,7 @@ body {
 
 		<div class="content clearfix">
 
-			<form action="registration" method="post">
+			<form action="Registration" method="post">
 
 				<h1>Registration</h1>
 
@@ -100,11 +100,16 @@ body {
 						</select>
 					</div>
 					<!-- /select -->
+					<div class="field">
+						<label for="number">Contact Number</label> <input type="number"
+							id="number" name="number" value="" placeholder="Contact Number"
+							class="login username-field" min="1111111111" max="9999999999" required />
+					</div>
 
 					<div class="field">
 						<label for="address">Address</label> <input type="text"
 							id="address" name="address" value="" placeholder="Address"
-							class="login username-field" pattern="[A-Za-z0-9-]" required />
+							class="login username-field" required />
 					</div>
 
 					<div class="field">
@@ -128,11 +133,6 @@ body {
 				<!-- /login-fields -->
 
 				<div class="login-actions">
-					<!-- 
-				<span class="login-checkbox">
-					<input id="Field" name="Field" type="checkbox" class="field login-checkbox" value="First Choice" tabindex="4" />
-					<label class="choice" for="Field">Remember Me</label>
-				</span> -->
 					<a href="home.jsp" style="float: left;"
 						class="">Have an account?</a>
 					<button class="button btn btn-success btn-large">Register</button>

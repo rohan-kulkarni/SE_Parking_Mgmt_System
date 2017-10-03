@@ -24,7 +24,7 @@ public class Registration extends HttpServlet {
 	public String PASS = "Admin123";
 	public Connection conn = null;
 	public Statement stmt = null;
-	public String email, pass, loginType, fName, lName, address, city, zip, state;
+	public String email, pass, loginType, fName, lName, address, city, zip, state, contactno;
 	public ResultSet res = null;
 
 	/**
@@ -51,6 +51,7 @@ public class Registration extends HttpServlet {
 			city = request.getParameter("city");
 			state = request.getParameter("state");
 			zip = (String) request.getParameter("zipcode");
+			contactno = (String) request.getParameter("number");
 			loginType = request.getParameter("loginType");
 
 			Class.forName("com.mysql.jdbc.Driver");
@@ -67,10 +68,21 @@ public class Registration extends HttpServlet {
 
 	private void parkingOwner(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		String sql = "";
 
 		try {
+			stmt.executeUpdate("insert into users (`username`, `password`, `type`) values('" + email + "','"
+					+ pass + "','owner')");
+			res = null;
+			res = stmt.executeQuery("select user_id from users where (username='" + email + "')");
+			res.next();
+			int u_id = res.getInt("user_id");
+			stmt.executeUpdate(
+					"insert into parkingowner (`PO_fullName`,`PO_contactNo`,`Users_user_id`,`PO_address`,`PO_city`,`PO_state`,`PO_zip`) values('"
+							+ fName + " " + lName + "','" + contactno + "','" + u_id + "','" + address + "','" + city
+							+ "','" + state + "','" + zip + "')");
+
 			request.setAttribute("userName", fName);
+			request.setAttribute("name", fName+" "+lName);
 			request.getRequestDispatcher("/parkingOwnerDashboard.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
