@@ -37,7 +37,7 @@
                             class="icon-user"></i> Parking Owner <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+              <li><a href="LogoutServlet">Logout</a></li>
             </ul>
           </li>
         </ul>
