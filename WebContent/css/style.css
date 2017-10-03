@@ -317,7 +317,7 @@ textarea {
 
 .footer {
 	
-	position: relative;
+	position: fixed;
     height: 33px;
     padding-top: 20px;
     bottom: 0px !important;
