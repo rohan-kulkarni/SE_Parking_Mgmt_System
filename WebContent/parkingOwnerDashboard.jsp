@@ -1,3 +1,4 @@
+<!-- RAHUL -->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -22,7 +23,7 @@
 			<!-- navbar -->
 			<jsp:include page="./parkingHeader.jsp"/>
 			<!-- /navbar -->
-
+			<% request.getAttribute("user_id"); %>
 			<div class="main">
  				 <div class="main-inner">
    					 <div class="container">

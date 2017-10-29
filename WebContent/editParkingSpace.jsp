@@ -3,12 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<meta charset="utf-8">
-<title>Manage Anonymous User</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Edit Parking Space</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link
@@ -24,7 +20,6 @@
 <script src="js/jquery-1.8.2.js" type="text/javascript"></script>
 <script src="js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
 <script src="js/jquery.jtable.js" type="text/javascript"></script>
-
 
 <style>
 body, h1, h2, h3, h4, h5 {
@@ -45,71 +40,64 @@ body {
 	font-size: medium;
 	text-align: center
 }
-
-.jtable-title {
-	background-color: #f3f0eb !important;
-}
-
-.jtable-title-text {
-	color: #000 !important;
-}
-
-.jtable-toolbar-item {
-	background-color: #f3f0eb !important;
-	color: #000 !important;
-}
-
-.ui-widget-header {
-	background: #f3f0eb url(images/ui-bg_highlight-soft_15_cc0000_1x100.png)
-		50% 50% repeat-x !important;
-	color: #000 !important;
-}
-
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
-		console.log('jjjj');
-		$('#AnonymousUserContainer').jtable({
+		var url_string = window.location;
+		var url = new URL(url_string);
+		var c = url.searchParams.get("id");
+		console.log(c);
+		$('#parkingSpaces').jtable({
 			title : 'Anonymous User',
 			actions : {
-				listAction : 'ViewAnonymous?action=list',
-				createAction : 'ViewAnonymous?action=create',
-				updateAction : 'ViewAnonymous?action=update',
-				deleteAction : 'ViewAnonymous?action=delete'
+				listAction : 'EditParkingSpace?action=list&pId=' + c,
+				createAction : 'EditParkingSpace?action=create&pId=' + c,
+				updateAction : 'EditParkingSpace?action=update&pId=' + c,
+				deleteAction : 'EditParkingSpace?action=delete&pId=' + c
 			},
 			fields : {
-				parkingName : {
-					title : 'Parking Space Name',
-					key : true,
+				vehicleType : {
+					title : 'Vehicle Type',
 					list : true,
-					create : true
+					create : true,
+					width : '30%'
 				},
-				fullName : {
-					title : 'Full Name',
-					width : '30%',
+				onlineSlots : {
+					title : 'Online Slots',
+					width : '15%',
 					edit : true
 				},
-				email : {
-					title : 'Email',
-					width : '30%',
-					edit : false
+				onlineCharge : {
+					title : 'Online Charges',
+					width : '15%',
+					edit : true
 				},
-				password : {
-					title : 'Password',
-					list : false,
-					input : function(data) {
-						return '<input type="password" name="password">'
-					},
-					width : '20%'
+				offlineSlots : {
+					title : 'Offline Slots',
+					width : '15%',
+					edit : true
+
 				},
-				contactNo : {
-					title : 'Contact Number',
+				offlineCharge : {
+					title : 'Offline Charges',
+					width : '15%',
+					edit : true
+				},
+				tax : {
+					title : 'Tax',
 					width : '20%',
 					edit : true
+				},
+				psId : {
+					title : 'Parking Space ID',
+					edit : false,
+					list : false,
+					key:true
 				}
 			}
 		});
-		$('#AnonymousUserContainer').jtable('load');
+		$('#parkingSpaces').jtable('load');
+
 	});
 </script>
 
@@ -126,17 +114,10 @@ body {
 	<div class="main">
 		<div class="main-inner">
 			<div class="container">
-				<div class="row">
-					<!-- /widget -->
-					<div class="widget widget-table action-table">
-						<!-- /widget-header -->
-						<div id="AnonymousUserContainer"></div>
-						<!-- /widget-content -->
-					</div>
-					<!-- /widget -->
-					<!-- /widget -->
-				</div>
-				<!-- /span6 -->
+				<div id="parkingSpaces"></div>
+				<form action="editParkingSpace?action=deleteEntry&pId=0">
+					<button type="submit" class="btn">Delete Parking Space</button>
+				</form>
 			</div>
 			<!-- /row -->
 		</div>
@@ -150,16 +131,8 @@ body {
 	<!-- footer -->
 	<jsp:include page="./footer.jsp" />
 	<!-- /footer -->
-
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="js/excanvas.min.js"></script>
-	<script src="js/base.js"></script>
-	<script src="js/chart.min.js" type="text/javascript"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/base.js"></script>
 	<script src="js/jquery-1.8.2.js" type="text/javascript"></script>
 	<script src="js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
 	<script src="js/jquery.jtable.js" type="text/javascript"></script>
-
 </body>
 </html>

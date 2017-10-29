@@ -1,3 +1,4 @@
+<!-- RAHUL -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,16 +30,27 @@
 </style>
 </head>
 <body>
+
+			<%
+				if(session.getAttribute("username")==null){
+					
+					response.sendRedirect("login.jsp");
+					
+				}
+			
+			%>
+
+
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container"> <a class="brand" href="#" style="font-size: xx-large;">Parking Management System </a>
       <div class="nav-collapse">
         <ul class="nav pull-right">
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Vehicle Owner <b class="caret"></b></a>
+                            class="icon-user"></i> ${username} <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+              <li><a href="LogoutServlet">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -55,24 +67,6 @@
   <!-- /navbar-inner --> 
 </div>
 <!-- /navbar -->
-<div class="subnavbar">
-  <div class="subnavbar-inner">
-    <div class="container">
-      <ul class="mainnav">
-        <li class="active"><a href="#"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-            <li><a href="#"><i class="fa fa-address-card"></i><span>Edit Profile</span></a></li>
-       		<li><a href="#"><i class="fa fa-thumb-tack"></i><span>Change Password</span></a> </li>
-            <li><a href="#"><i class="fa fa-braille"></i><span>Book Parking Space</span></a> </li>
-            <li><a href="#"><i class="fa fa-clipboard"></i><span>Your Bookings</span></a> </li>
-            <li><a href="#"><i class="fa fa-automobile"></i><span>Manage Vehicles </span></a> </li>
-            <li><a href="#"><i class="fa fa-location-arrow"></i><span>Parking Locator</span> </a> </li>
-      </ul>
-    </div>
-    <!-- /container --> 
-  </div>
-  <!-- /subnavbar-inner --> 
-</div>
-<!-- /subnavbar -->
 
 <!-- Placed at the end of the document so the pages load faster --> 
 <script src="js/jquery-1.7.2.min.js"></script> 

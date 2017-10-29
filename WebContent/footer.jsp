@@ -14,7 +14,7 @@
 <link href="css/pages/dashboard.css" rel="stylesheet">
 </head>
 <body>
-<div class="footer" style="position: relative">
+<div class="footer">
   <div class="footer-inner">
     <div class="container">
       <div class="row">

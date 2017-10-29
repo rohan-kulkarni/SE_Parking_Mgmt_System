@@ -1,9 +1,9 @@
-<!DOCTYPE html> 
+<!-- RAHUL -->
 <%@page import="java.sql.*"%>
-<html lang="en">
-
-<head>
-<meta charset="utf-8">
+<%@page import="com.mvc.util.DBConnection"%>
+ <html lang="en">
+      <head>  
+      	<meta charset="utf-8">
 		<title>Dashboard</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,41 +20,123 @@
    			.table thead th {font-size: large;font-weight: bold;text-align: center}
    			.table tbody td {font-size: medium;text-align: center}
 		</style>
+      	
+      	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+      	<script language="javascript" type="text/javascript">  
+		      var xmlHttp  
+		      var xmlHttp
+		      function showState(str){
+		      	if (typeof XMLHttpRequest != "undefined"){
+		     		 xmlHttp= new XMLHttpRequest();
+		      }
+		      else if (window.ActiveXObject){
+		     	 xmlHttp= new ActiveXObject("Microsoft.XMLHTTP");
+		      }
+		      if (xmlHttp==null){
+		      	alert("Browser does not support XMLHTTP Request")
+		      	return;
+		      } 
+		      var url="state.jsp";
+		      url +="?count=" +str;
+		      xmlHttp.onreadystatechange = stateChange;
+		      xmlHttp.open("GET", url, true);
+		      xmlHttp.send(null);
+		      }
+		
+		      function stateChange(){   
+		      	if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
+		    	  document.getElementById("state").innerHTML=xmlHttp.responseText   
+		   	   }   
+		      }
+		
+		      function showCity(str){
+		      if (typeof XMLHttpRequest != "undefined"){
+		        xmlHttp= new XMLHttpRequest();
+		        }
+		      else if (window.ActiveXObject){
+		        xmlHttp= new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		      if (xmlHttp==null){
+		      alert("Browser does not support XMLHTTP Request")
+		      return;
+		      } 
+		      var url="city.jsp";
+		      url +="?count=" +str;
+		      xmlHttp.onreadystatechange = stateChange1;
+		      xmlHttp.open("GET", url, true);
+		      xmlHttp.send(null);
+		      }
+		      function stateChange1(){   
+		     	 if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
+		     		 document.getElementById("city").innerHTML=xmlHttp.responseText   
+		      }   
+		      }
+      
+      
+		      $(document).ready(function() {
+			    	$.ajax({
+		  			type : 'GET',
+		  			url : 'Parkinglocator',
+		  			success : function(responseText) {
+		  				$('#responseNote').html(responseText);
+		  			}
+		  		});
+			   $('#submit').click(function() {
+			    	//	var state = $('#state').val();
+			    	//	var city = $('#city').val();
+			    		$.ajax({
+			    			type : 'POST',
+			    			url : 'Parkinglocator',
+			    		//	data: {
+			    		//		state : state,
+			    		//		city : city,
+			    				
+			    		//	},
+			    			success : function(responseText) {
+			    				
+			    				$('#responseNote').html(responseText);
+			    			}
+			    		});
+			    	});
+				});
+      
+      
+      </script>  
+  </head>  
+  <body>  
+  
+  		<%
+				if(session.getAttribute("username")==null){
+					
+					response.sendRedirect("login.jsp");
+					
+				}
+			
+			%>
 	
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-		<script type="text/javascript">
-		    $(document).ready(function() {
-		    	$.ajax({
-	    			type : 'GET',
-	    			url : 'Parkinglocator',
-	    			success : function(responseText) {
-	    				$('#responseNote').html(responseText);
-	    			}
-	    		});
-		    	$('#submit').click(function() {
-		    		var uname = $('#state').val();
-		    		var mobile = $('#city').val();
-		    		$.ajax({
-		    			type : 'POST',
-		    			url : 'Parkinglocator',
-		    			data: {
-		    				state : state,
-		    				city : city,
-		    				
-		    			},
-		    			success : function(responseText) {
-		    				alert(responseText);
-		    			}
-		    		});
-		    	});
-    		});
-		 
-    	</script>
-</head>
-<body>
-			<!-- navbar -->
+	
+	<!-- navbar -->
 			<jsp:include page="./vehicleOwnerHeader.jsp"/>
 			<!-- /navbar -->
+			
+			<div class="subnavbar">
+				  <div class="subnavbar-inner">
+				    <div class="container">
+				      <ul class="mainnav">
+				        <li class=""><a href="vehicleOwnerDashboard.jsp"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
+				            <li><a href="Profile.jsp"><i class="fa fa-address-card"></i><span>Edit Profile</span></a></li>
+				       		<li><a href="changePassword.jsp"><i class="fa fa-thumb-tack"></i><span>Change Password</span></a> </li>
+				            <li ><a href="bookparking.jsp"><i class="fa fa-braille"></i><span>Book Parking Space</span></a> </li>
+				            <li ><a href="yourBookings.jsp"><i class="fa fa-clipboard"></i><span>Your Bookings</span></a> </li>
+				            <li ><a href="manageVehicle.jsp"><i class="fa fa-automobile"></i><span>Manage Vehicles </span></a> </li>
+				            <li class="active"><a href="parkingLocator.jsp"><i class="fa fa-location-arrow"></i><span>Parking Locator</span> </a> </li>
+				      </ul>
+				    </div>
+				    <!-- /container --> 
+				  </div>
+				  <!-- /subnavbar-inner --> 
+				</div>
+				<!-- /subnavbar -->
 			
 				<div class="main">
 	
@@ -80,82 +162,37 @@
 										<br>
 										
 										<div class="tab-content">
-				
-				
-											<form action="" method="post" class="form-horizontal">
-												<table>
-													<tr>
-														<th for="state">State</th>
-														<td>
-													<select name="state" id="state" onchange="this.form.submit();">
-														<option value="0">Select State</option>
-														<%
-														try{
-															String Query = "Select distinct p_state from parking ";
-															Class.forName("com.mysql.jdbc.Driver").newInstance();
-															Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/se_pms", "root", "admin");
-															Statement stm = conn.createStatement();
-															ResultSet rs = stm.executeQuery(Query);
-															while(rs.next())
-															{
-																%>
-																<option value="<%=rs.getString("p_state")%>"><%= rs.getString("p_state") %></option>
-																<%
-															}
-															
-															
-														}
-														catch(Exception e)
-														{
-															e.printStackTrace();
-														}
-														
-														%>
-													
-													</select>
-													</td>
-													</tr>
-													<tr>
-														<th for="city">City</th>
-														<td>
-															<select>
-																<option value="0">Select City</option>
-																<%
-																
-																try{
-																	String query = "Select distinct p_city from parking where p_state=?";
-																	Class.forName("com.mysql.jdbc.Driver").newInstance();
-																	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/se_pms", "root", "admin");
-																	PreparedStatement psmt = con.prepareStatement(query);
-																	psmt.setString(1, request.getParameter("state"));
-																	
-																	ResultSet rs = psmt.executeQuery();
-																	while(rs.next())
-																	{
-																		%>
-																		<option value="<%=rs.getString("p_city")%>"><%=rs.getString("p_city")%> </option>
-																		<% 
-																		
-																	}
-																}
-																catch(Exception e)
-																{
-																	e.printStackTrace();
-																}
-																
-																%>
-																
-																
-															</select>
-														</td>
-													</tr>
-												</table>
-												<div class="form-actions">
+  
+  											<form action="parkingLocatorResult.jsp" method="post" class="form-horizontal">
+										      <table border="1">
+										      <tr><th>State</th><th>City</th></tr>
+										      <tr><td>
+										      <select name='country' onchange="showState(this.value)">  
+										       <option value="none">Select</option>  
+										    <%
+												 Connection con = DBConnection.createConnection();  
+												 Statement stmt = con.createStatement();  
+												 ResultSet rs = stmt.executeQuery("Select distinct p_state from parking");
+												 while(rs.next()){
+										     %>
+										      <option value="<%=rs.getString("p_state")%>"><%=rs.getString("p_state")%></option>  
+										      <%
+										 }
+										     %>
+										      </select> 
+										      </td>
+										      <td id='state'><select name='state' >  
+										      <option value='-1'></option>  
+										      </select>
+										      </td>
+										      </tr>
+										      </table>
+										      <div class="form-actions">
 																<button type="submit" class="btn btn-primary" id="submit">Search</button> 
-																<button class="btn">Reset</button>
+																<button class="btn" type="reset">Reset</button>
 															</div>
-												
-											</form>
+										      
+										      </form>
 												</div>
 													
 													
@@ -164,7 +201,11 @@
 											</div>
 																	
 										</div> <!-- /widget-content -->
-											<div id="responseNote"></div>
+									<div class="widget-header">
+					      				<i class="icon-user"></i>
+					      				<h3>Available Parking Space</h3>
+					  				</div>	
+									 <div id="responseNote"></div>
 									</div> <!-- /widget -->
 						      		
 							    </div> <!-- /span8 -->
@@ -181,7 +222,7 @@
 						</div> <!-- /main-inner -->
 					    
 					</div> <!-- /main -->
-<!-- footer -->
+			<!-- footer -->
 			<jsp:include page="./footer.jsp"/>
 			<!-- /footer --> 
  

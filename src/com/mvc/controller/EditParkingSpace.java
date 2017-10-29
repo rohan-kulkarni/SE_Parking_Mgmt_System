@@ -15,24 +15,36 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.mvc.bean.AnonymousUser;
-import com.mvc.dao.AnonymousDAO;;
+import com.mvc.bean.ParkingSpace;
+import com.mvc.dao.ParkingSpaceDAO;
 
 /**
- * Servlet implementation class ViewAnonymous
+ * Servlet implementation class EditParkingSpace
  */
-@WebServlet("/ViewAnonymous")
-public class ViewAnonymous extends HttpServlet {
+@WebServlet("/EditParkingSpace")
+public class EditParkingSpace extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public String email, fullName, parkingName, contactNo;
-	public AnonymousDAO dao;
+	ParkingSpaceDAO dao;
+	int onlineSlots, onlineCharge, offlineSlots, offlineCharge, tax,psId;
+	String vehicleType;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ViewAnonymous() {
+	public EditParkingSpace() {
 		super();
 		// TODO Auto-generated constructor stub
-		dao = new AnonymousDAO();
+		dao = new ParkingSpaceDAO();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -42,22 +54,31 @@ public class ViewAnonymous extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Get all user");
+		System.out.println("list");
 		if (request.getParameter("action") != null) {
-			List<AnonymousUser> lstUser = new ArrayList<AnonymousUser>();
+			
+			List<ParkingSpace> lstUser = new ArrayList<ParkingSpace>();
 			String action = (String) request.getParameter("action");
+			int pId = Integer.parseInt(request.getParameter("pId"));
+			
+			if(action.equals("deleteEntry")) {
+				dao.deleteParking(pId);
+				request.getRequestDispatcher("/parkingSpace.jsp").forward(request, response);
+			}
+			
 			Gson gson = new Gson();
 			response.setContentType("application/json");
 
 			if (action.equals("list")) {
 				try {
 					// Fetch Data from User Table
-					lstUser = dao.getAllUsers();
+					lstUser = dao.getAllSpaces(pId);
 					// Convert Java Object to Json
 					JsonElement element = gson.toJsonTree(lstUser, new TypeToken<List<AnonymousUser>>() {
 					}.getType());
 					JsonArray jsonArray = element.getAsJsonArray();
 					String listData = jsonArray.toString();
+					System.out.println(listData);
 					// Return Json in the format required by jTable plugin
 					listData = "{\"Result\":\"OK\",\"Records\":" + listData + "}";
 					response.getWriter().print(listData);
@@ -67,34 +88,46 @@ public class ViewAnonymous extends HttpServlet {
 					ex.printStackTrace();
 				}
 			} else if (action.equals("create") || action.equals("update")) {
-				AnonymousUser user = new AnonymousUser();
-				if (request.getParameter("parkingName") != null) {
-					parkingName = request.getParameter("userid");
-					user.setParkingName(parkingName);
+				ParkingSpace space = new ParkingSpace();
+				if (request.getParameter("onlineCharge") != null) {
+					onlineCharge = Integer.parseInt(request.getParameter("onlineCharge"));
+					space.setOnlineCharge(onlineCharge);
 				}
-				if (request.getParameter("fullName") != null) {
-					fullName= (String) request.getParameter("fullName");
-					user.setFullName(fullName);
+				if (request.getParameter("onlineSlots") != null) {
+					onlineSlots = Integer.parseInt(request.getParameter("onlineSlots"));
+					space.setOnlineSlots(onlineSlots);
 				}
-				if (request.getParameter("contactNo") != null) {
-					contactNo = (String) request.getParameter("contactNo");
-					user.setEmail(contactNo);
+				if (request.getParameter("offlineSlots") != null) {
+					offlineSlots = Integer.parseInt(request.getParameter("offlineSlots"));
+					space.setOfflineCharge(offlineSlots);
 				}
-				if (request.getParameter("email") != null) {
-					String email = (String) request.getParameter("email");
-					user.setEmail(email);
+				if (request.getParameter("offlineCharge") != null) {
+					offlineCharge = Integer.parseInt(request.getParameter("offlineCharge"));
+					space.setOfflineSlots(offlineCharge);
+				}
+				if (request.getParameter("tax") != null) {
+					tax = Integer.parseInt(request.getParameter("tax"));
+					space.setTax(tax);
+				}
+				if (request.getParameter("vehicleType") != null) {
+					vehicleType = request.getParameter("onlineCharge");
+					space.setVehicleType(vehicleType);
+				}
+				if (request.getParameter("psId") != null) {
+					psId = Integer.parseInt(request.getParameter("psId"));
+					space.setPsId(psId);
 				}
 				try {
 					if (action.equals("create")) {// Create new record
-						dao.addUser(user);
-						lstUser.add(user);
+						dao.addSpace(space,pId);
+						lstUser.add(space);
 						// Convert Java Object to Json
-						String json = gson.toJson(user);
+						String json = gson.toJson(space);
 						// Return Json in the format required by jTable plugin
 						String listData = "{\"Result\":\"OK\",\"Record\":" + json + "}";
 						response.getWriter().print(listData);
 					} else if (action.equals("update")) {// Update existing record
-						dao.updateUser(user);
+						dao.updateSpace(space);
 						String listData = "{\"Result\":\"OK\"}";
 						response.getWriter().print(listData);
 					}
@@ -104,18 +137,19 @@ public class ViewAnonymous extends HttpServlet {
 				}
 			} else if (action.equals("delete")) {// Delete record
 				try {
-					if (request.getParameter("userid") != null) {
-						String email = (String) request.getParameter("email");
-						dao.deleteUser(email);
-						String listData = "{\"Result\":\"OK\"}";
-						response.getWriter().print(listData);
+					if (request.getParameter("psId") != null) {
+						psId = Integer.parseInt(request.getParameter("psId"));
 					}
+					dao.deleteSpace(psId);
+					String listData = "{\"Result\":\"OK\"}";
+					response.getWriter().print(listData);
 				} catch (Exception ex) {
 					String error = "{\"Result\":\"ERROR\",\"Message\":" + ex.getStackTrace().toString() + "}";
 					response.getWriter().print(error);
 				}
 			}
 		}
+
 	}
 
 }

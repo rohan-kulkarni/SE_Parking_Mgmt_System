@@ -37,7 +37,7 @@
                             class="icon-user"></i> Parking Owner <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="javascript:;">Profile</a></li>
-              <li><a href="javascript:;">Logout</a></li>
+              <li><a href="LogoutServlet">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -59,12 +59,12 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li class="active"><a href="#"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li><a href="#"><i class="fa fa-address-card"></i><span>Edit Profile</span></a></li>
-        <li><a href="#"><i class="fa fa-thumb-tack"></i><span>Change Password</span></a> </li>
-        <li><a href="#"><i class="fa fa-braille"></i><span>Parking Spaces</span></a> </li>
+        <li class="active"><a href="parkingOwnerDashboard.jsp"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
+        <li><a href="profiledetails.jsp"><i class="fa fa-address-card"></i><span>Edit Profile</span></a></li>
+        <li><a href="changePassword.jsp"><i class="fa fa-thumb-tack"></i><span>Change Password</span></a> </li>
+        <li><a href="parkingSpace.jsp"><i class="fa fa-braille"></i><span>Parking Spaces</span></a> </li>
          <li><a href="#"><i class="fa fa-credit-card"></i><span>Bookings</span></a> </li>
-        <li><a href="#"><i class="fa fa-user"></i><span>Anonymous User</span></a> </li>
+        <li><a href="manageAnonymousUser.jsp"><i class="fa fa-user"></i><span>Anonymous User</span></a> </li>
       </ul>
     </div>
     <!-- /container --> 
@@ -77,6 +77,9 @@
 <script src="js/jquery-1.7.2.min.js"></script> 
 <script src="js/bootstrap.js"></script>
 <script src="js/base.js"></script> 
+
+
+
 
 </body>
 </html>

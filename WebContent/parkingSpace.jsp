@@ -3,12 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<meta charset="utf-8">
-<title>Manage Anonymous User</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Add Parking Space</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <link
@@ -17,15 +13,7 @@
 <link href="css/font-awesome.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/pages/dashboard.css" rel="stylesheet">
-<link href="css/metro/crimson/jtable.css" rel="stylesheet"
-	type="text/css" />
-<link href="css/jquery-ui-1.10.3.custom.css" rel="stylesheet"
-	type="text/css" />
 <script src="js/jquery-1.8.2.js" type="text/javascript"></script>
-<script src="js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
-<script src="js/jquery.jtable.js" type="text/javascript"></script>
-
-
 <style>
 body, h1, h2, h3, h4, h5 {
 	font-family: "Poppins", sans-serif;
@@ -45,77 +33,45 @@ body {
 	font-size: medium;
 	text-align: center
 }
-
-.jtable-title {
-	background-color: #f3f0eb !important;
-}
-
-.jtable-title-text {
-	color: #000 !important;
-}
-
-.jtable-toolbar-item {
-	background-color: #f3f0eb !important;
-	color: #000 !important;
-}
-
-.ui-widget-header {
-	background: #f3f0eb url(images/ui-bg_highlight-soft_15_cc0000_1x100.png)
-		50% 50% repeat-x !important;
-	color: #000 !important;
-}
-
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
-		console.log('jjjj');
-		$('#AnonymousUserContainer').jtable({
-			title : 'Anonymous User',
-			actions : {
-				listAction : 'ViewAnonymous?action=list',
-				createAction : 'ViewAnonymous?action=create',
-				updateAction : 'ViewAnonymous?action=update',
-				deleteAction : 'ViewAnonymous?action=delete'
+		$.ajax({
+			type : 'GET',
+			url : 'ViewParkinSpace',
+			success : function(response) {
+				if (response != null)
+					$('#parkingSpace').html(response);
+				else
+					$('#msg').html("No Parking Space Added Yet");
 			},
-			fields : {
-				parkingName : {
-					title : 'Parking Space Name',
-					key : true,
-					list : true,
-					create : true
-				},
-				fullName : {
-					title : 'Full Name',
-					width : '30%',
-					edit : true
-				},
-				email : {
-					title : 'Email',
-					width : '30%',
-					edit : false
-				},
-				password : {
-					title : 'Password',
-					list : false,
-					input : function(data) {
-						return '<input type="password" name="password">'
-					},
-					width : '20%'
-				},
-				contactNo : {
-					title : 'Contact Number',
-					width : '20%',
-					edit : true
-				}
+			failure : function(error) {
+				console.log(error)
 			}
 		});
-		$('#AnonymousUserContainer').jtable('load');
+		$('#').click(function() {
+			var uname = $('#username').val();
+			var mobile = $('#mobile').val();
+			var regNum = $('#regNum').val();
+			var vehicleType = $('#vehicleType').val();
+			$.ajax({
+				type : 'POST',
+				url : 'AnonymousUser',
+				data : {
+					name : uname,
+					mobile_number : mobile,
+					RegistrationNo : regNum,
+					type : vehicleType
+				},
+				success : function(responseText) {
+					alert(responseText);
+				}
+			});
+		});
 	});
 </script>
-
 </head>
 <body>
-
 	<!-- navbar -->
 	<jsp:include page="./parkingHeader.jsp" />
 	<!-- /navbar -->
@@ -130,12 +86,19 @@ body {
 					<!-- /widget -->
 					<div class="widget widget-table action-table">
 						<!-- /widget-header -->
-						<div id="AnonymousUserContainer"></div>
+						<div id="parkingSpace">
+							<h4 id="msg"></h4>
+						</div>
 						<!-- /widget-content -->
+					</div>
+					<div>
+						<a href="addParkingSpace.jsp" class="btn btn-primary">Add New
+							Space</a>
 					</div>
 					<!-- /widget -->
 					<!-- /widget -->
 				</div>
+				<div class="row"></div>
 				<!-- /span6 -->
 			</div>
 			<!-- /row -->
@@ -150,7 +113,16 @@ body {
 	<!-- footer -->
 	<jsp:include page="./footer.jsp" />
 	<!-- /footer -->
-
+	<script type="text/javascript">
+	function editRecord(id) {
+		/* var f = document.form;
+		f.method = "post";
+		f.action = 'viewParkingSpace.jsp?id=' + id;
+		f.submit(); */
+		document.location = 'editParkingSpace.jsp?id=' + id;
+	}
+	
+	</script>
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/excanvas.min.js"></script>
 	<script src="js/base.js"></script>
