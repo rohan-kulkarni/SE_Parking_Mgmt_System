@@ -64,7 +64,7 @@ body {
 					type : vehicleType
 				},
 				success : function(responseText) {
-					alert(responseText);
+					console.log(responseText);
 				}
 			});
 		});
@@ -124,14 +124,6 @@ body {
 	
 	</script>
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="js/excanvas.min.js"></script>
-	<script src="js/base.js"></script>
-	<script src="js/chart.min.js" type="text/javascript"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/base.js"></script>
-	<script src="js/jquery-1.8.2.js" type="text/javascript"></script>
-	<script src="js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
-	<script src="js/jquery.jtable.js" type="text/javascript"></script>
 
 </body>
 </html>

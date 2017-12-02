@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,8 +43,10 @@ public class HomeLogin extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("Begin");
 		HttpSession session = null;
+		//PrintWriter out;
 
 		try {
+			//out = response.getWriter();
 			uName = request.getParameter("username");
 			pass = request.getParameter("password");
 			loginType = request.getParameter("loginType");
@@ -55,6 +58,7 @@ public class HomeLogin extends HttpServlet {
 			res = stmt.executeQuery(sql);
 			if (res.next()) {
 				System.out.println("success");
+				request.setAttribute("msg", "");
 				session = request.getSession();
 				session.setAttribute("userName", uName);
 				session.setAttribute("user_id", res.getString("user_id"));
@@ -64,7 +68,15 @@ public class HomeLogin extends HttpServlet {
 				if(loginType.equals("user"))
 					request.getRequestDispatcher("/vehicleOwnerDashboard.jsp").forward(request, response);
 				if(loginType.equals("anonymous"))
-					request.getRequestDispatcher("#").forward(request, response);
+					response.sendRedirect("anonymousDashboard.jsp");
+					//request.getRequestDispatcher("/anonymousDashboard.jsp").forward(request, response);
+			}
+			else {
+				request.setAttribute("msg", "invalid credentials");
+				//out.println("<p style=\"color:red\">Old Password doesn't match</p>");
+				RequestDispatcher rd=request.getRequestDispatcher("/home.jsp");    
+		        rd.include(request,response);
+				return;
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

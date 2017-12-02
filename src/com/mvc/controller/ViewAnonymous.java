@@ -23,7 +23,7 @@ import com.mvc.dao.AnonymousDAO;;
 @WebServlet("/ViewAnonymous")
 public class ViewAnonymous extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public String email, fullName, parkingName, contactNo;
+	public String email, fullName, parkingName, contactNo, password;
 	public AnonymousDAO dao;
 
 	/**
@@ -43,6 +43,7 @@ public class ViewAnonymous extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Get all user");
+		int pId = (int) request.getSession().getAttribute("pId");
 		if (request.getParameter("action") != null) {
 			List<AnonymousUser> lstUser = new ArrayList<AnonymousUser>();
 			String action = (String) request.getParameter("action");
@@ -52,7 +53,7 @@ public class ViewAnonymous extends HttpServlet {
 			if (action.equals("list")) {
 				try {
 					// Fetch Data from User Table
-					lstUser = dao.getAllUsers();
+					lstUser = dao.getAllUsers(pId);
 					// Convert Java Object to Json
 					JsonElement element = gson.toJsonTree(lstUser, new TypeToken<List<AnonymousUser>>() {
 					}.getType());
@@ -68,8 +69,8 @@ public class ViewAnonymous extends HttpServlet {
 				}
 			} else if (action.equals("create") || action.equals("update")) {
 				AnonymousUser user = new AnonymousUser();
-				if (request.getParameter("parkingName") != null) {
-					parkingName = request.getParameter("userid");
+				if (request.getParameter("parkingNameList") != null) {
+					parkingName = request.getParameter("parkingNameList");
 					user.setParkingName(parkingName);
 				}
 				if (request.getParameter("fullName") != null) {
@@ -78,11 +79,15 @@ public class ViewAnonymous extends HttpServlet {
 				}
 				if (request.getParameter("contactNo") != null) {
 					contactNo = (String) request.getParameter("contactNo");
-					user.setEmail(contactNo);
+					user.setContactNo(contactNo);
 				}
 				if (request.getParameter("email") != null) {
-					String email = (String) request.getParameter("email");
+					email = (String) request.getParameter("email");
 					user.setEmail(email);
+				}
+				if (request.getParameter("password") != null) {
+					password = (String) request.getParameter("password");
+					user.setPassword(password);
 				}
 				try {
 					if (action.equals("create")) {// Create new record

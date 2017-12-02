@@ -16,7 +16,7 @@ public class LoginServlet extends HttpServlet
 		{
 			// TODO Auto-generated method stub
 			
-			String uname = request.getParameter("username");
+			/*String uname = request.getParameter("username");
 			String password = request.getParameter("password");
 			
 			LoginBean loginbean=new LoginBean();
@@ -37,7 +37,34 @@ public class LoginServlet extends HttpServlet
 			}
 
 			HttpSession session = request.getSession();
-			session.setAttribute("username", uname);
+			session.setAttribute("username", uname);*/
+			
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			
+			LoginBean loginbean=new LoginBean();
+			loginbean.setUserName(username);
+			loginbean.setPassword(password);
+			
+			LoginDao logindao=new LoginDao();
+			String validateUser=logindao.authenticateUser(loginbean);
+			if (validateUser.equals("SUCCESS"))
+			{
+				request.setAttribute("username",username);
+				request.getSession().setAttribute("username",username);
+				request.getRequestDispatcher("/adminDashboard.jsp").forward(request, response);;
+			}
+			else
+			{
+				request.setAttribute("errMessage",validateUser);
+				request.getRequestDispatcher("/adminLogin.jsp").forward(request,response);
+			}
+
+			HttpSession session = request.getSession();
+			session.setAttribute("username", username);
+
+			
+			
 
 			}
 

@@ -13,6 +13,11 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/pages/dashboard.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/jquery-1.8.2.js" type="text/javascript"></script>
+<script src="js/bootstrap.js" type="text/javascript"></script>
+<script src="js/base.js"></script>
+
 <style>
    body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif;}
    body {font-size:20px;}
@@ -34,16 +39,13 @@
       <div class="nav-collapse">
         <ul class="nav pull-right">
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                            class="icon-user"></i> Parking Owner <b class="caret"></b></a>
+                            class="icon-user"></i> <%=session.getAttribute("username") %> <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="javascript:;">Profile</a></li>
               <li><a href="LogoutServlet">Logout</a></li>
             </ul>
           </li>
         </ul>
-        <form class="navbar-search pull-right">
-          <input type="text" class="search-query" placeholder="Search">
-        </form>
       </div>
       <!--/.nav-collapse -->
       <br/>
@@ -61,9 +63,9 @@
       <ul class="mainnav">
         <li class="active"><a href="parkingOwnerDashboard.jsp"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
         <li><a href="profiledetails.jsp"><i class="fa fa-address-card"></i><span>Edit Profile</span></a></li>
-        <li><a href="changePassword.jsp"><i class="fa fa-thumb-tack"></i><span>Change Password</span></a> </li>
+        <li><a href="changePasswordPO.jsp"><i class="fa fa-thumb-tack"></i><span>Change Password</span></a> </li>
         <li><a href="parkingSpace.jsp"><i class="fa fa-braille"></i><span>Parking Spaces</span></a> </li>
-         <li><a href="#"><i class="fa fa-credit-card"></i><span>Bookings</span></a> </li>
+         <li><a href="ownerBookings.jsp"><i class="fa fa-credit-card"></i><span>Manage Bookings</span></a> </li>
         <li><a href="manageAnonymousUser.jsp"><i class="fa fa-user"></i><span>Anonymous User</span></a> </li>
       </ul>
     </div>
@@ -74,9 +76,7 @@
 <!-- /subnavbar -->
 
 <!-- Placed at the end of the document so the pages load faster --> 
-<script src="js/jquery-1.7.2.min.js"></script> 
-<script src="js/bootstrap.js"></script>
-<script src="js/base.js"></script> 
+ 
 
 
 

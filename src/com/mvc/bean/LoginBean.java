@@ -1,5 +1,7 @@
 package com.mvc.bean;
 
+
+
 public class LoginBean
 {
 	private String userName;

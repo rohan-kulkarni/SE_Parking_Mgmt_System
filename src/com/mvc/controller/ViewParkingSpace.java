@@ -49,7 +49,7 @@ public class ViewParkingSpace extends HttpServlet {
 
 			connection = DBConnection.createConnection();
 			statement = connection.createStatement();
-			String sql = "select * from parking where status = 'approve' and Owner_PO_id=(select PO_id from parkingowner where Users_user_id = " + id + " )";
+			String sql = "select * from parking where status = 'approved' and Owner_PO_id=(select PO_id from parkingowner where Users_user_id = " + id + " )";
 			rSet = statement.executeQuery(sql);
 
 			output = output + "<table class='table table-striped table-list' height=30px border=1px>";

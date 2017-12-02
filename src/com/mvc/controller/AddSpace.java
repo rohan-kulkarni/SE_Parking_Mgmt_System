@@ -76,7 +76,7 @@ public class AddSpace extends HttpServlet {
 			rs.next();
 			ownerId = rs.getInt("PO_id");
 						
-			pStatement = connection.prepareStatement("insert into parking (P_name,P_state,P_city,P_address,P_zip,P_openTime,P_closeTime,Owner_PO_id) values(?,?,?,?,?,?,?,?)");
+			pStatement = connection.prepareStatement("insert into parking (P_name,P_state,P_city,P_address,P_zip,P_openTime,P_closeTime,Owner_PO_id,Status) values(?,?,?,?,?,?,?,?,?)");
 			pStatement.setString(1, pName);
 			pStatement.setString(2, pState);
 			pStatement.setString(3, pCity);
@@ -85,14 +85,16 @@ public class AddSpace extends HttpServlet {
 			pStatement.setString(6, pOpenTime);
 			pStatement.setString(7, pCloseTime);
 			pStatement.setInt(8, ownerId);
+			pStatement.setString(9, "pending");
 			
 			pStatement.executeUpdate();
 			
 			rs = statement.executeQuery("select P_id from parking where Owner_PO_id="+ownerId);
-			rs.next();
+			rs.last();
 			parkingId = rs.getInt("P_id");
 						
 			System.out.println(pVehicles);
+			System.out.println(parkingId);
 			vehicles = new JSONArray(pVehicles);
 			
 			

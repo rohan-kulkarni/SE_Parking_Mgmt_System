@@ -74,7 +74,7 @@ public class ParkingSpaceDAO {
 		// TODO Auto-generated method stub
 		
 		try {
-			PreparedStatement pStatement = connection.prepareStatement("update parkingspace SET PS_vehicleType=?,PS_AvailableOnlineSlots=?,PS_OnlineCharges=?,PS_AvailableOfflineSlots=?,PS_OfflineCharges=?,PS_Tax=?,Parking_P_id=? WHERE PS_id=?");
+			PreparedStatement pStatement = connection.prepareStatement("update parkingspace SET PS_vehicleType=?,PS_AvailableOnlineSlots=?,PS_OnlineCharges=?,PS_AvailableOfflineSlots=?,PS_OfflineCharges=?,PS_Tax=? WHERE PS_id=?");
 			pStatement.setString(1, space.getVehicleType());
 			pStatement.setInt(2, space.getOnlineSlots());
 			pStatement.setInt(3, space.getOnlineCharge());

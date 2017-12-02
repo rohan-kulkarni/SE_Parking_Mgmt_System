@@ -110,7 +110,7 @@ public class EditParkingSpace extends HttpServlet {
 					space.setTax(tax);
 				}
 				if (request.getParameter("vehicleType") != null) {
-					vehicleType = request.getParameter("onlineCharge");
+					vehicleType = request.getParameter("vehicleType");
 					space.setVehicleType(vehicleType);
 				}
 				if (request.getParameter("psId") != null) {

@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import com.mvc.bean.AnonymousUser;
 import com.mvc.util.DBConnection;
 
@@ -19,13 +21,13 @@ public class AnonymousDAO {
 		connection = DBConnection.createConnection();
 	}
 
-	public List<AnonymousUser> getAllUsers() {
+	public List<AnonymousUser> getAllUsers(int pId) {
 		// TODO Auto-generated method stub
 		List<AnonymousUser> users = new ArrayList<AnonymousUser>();
 		String parkingName,email,fullName,contactno,password;
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("select * from users inner join anonymoususer on users.user_id= anonymoususer.Users_user_id");
+			ResultSet rs = statement.executeQuery("select * from users inner join anonymoususer on users.user_id= anonymoususer.Users_user_id AND anonymoususer.Parking_P_id="+pId);
 			while (rs.next()) {
 				AnonymousUser user = new AnonymousUser(); 
 
@@ -36,6 +38,7 @@ public class AnonymousDAO {
 				password = rs.getString("password");
 				
 				user.setFullName(fullName);
+				//user.setParkingName(getParkingName(parkingName));
 				user.setParkingName(parkingName);
 				user.setContactNo(contactno);				
 				user.setEmail(email);
@@ -49,12 +52,29 @@ public class AnonymousDAO {
 		return users;
 	}
 
+	private String getParkingName(String parkingName) {
+		// TODO Auto-generated method stub
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("DisplayText", parkingName);
+			obj.put("Value", parkingName);
+			System.out.println(obj);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
+		return obj.toString();
+	}
+
 	public void addUser(AnonymousUser user) {
 		// TODO Auto-generated method stub
 		
 		try {
 			PreparedStatement pst1 = connection.prepareStatement("insert into users (username,password,type) values(?,?,?)");
-			PreparedStatement pst2 = connection.prepareStatement("insert into anonymoususer (Users_user_id,AU_fullname,AU_contactNo,AU_parkingName) values((select user_id from users where username=?),?,?,?)");
+			PreparedStatement pst2 = connection.prepareStatement("insert into anonymoususer (Users_user_id,AU_fullname,AU_contactNo,AU_parkingName,Parking_P_id) values((select user_id from users where username=?),?,?,?,(select P_id from parking where P_name=?))");
 			
 			pst1.setString(1, user.getEmail());
 			pst1.setString(2, user.getPassword());
@@ -64,6 +84,7 @@ public class AnonymousDAO {
 			pst2.setString(2, user.getFullName());
 			pst2.setString(3, user.getContactNo());
 			pst2.setString(4, user.getParkingName());
+			pst2.setString(5, user.getParkingName());
 			
 			pst1.executeUpdate();
 			pst2.executeUpdate();

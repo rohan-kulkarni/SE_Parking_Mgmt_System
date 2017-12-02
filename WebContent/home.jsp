@@ -99,8 +99,8 @@ body {
 					<div class="field">
 						<label for="loginType">User Type:</label> <select id="loginType"
 							name="loginType" class="select-input">
-							<option value="owner">Parking Owner</option>
 							<option value="user">Vehicle Owner</option>
+							<option value="owner">Parking Owner</option>
 							<option value="anonymous">Parking Attendent</option>
 						</select>
 					</div>
@@ -118,7 +118,7 @@ body {
 					<a href="registration.jsp" style="float: left;"
 						class="button btn btn-success btn-large">Register</a>
 					<button class="button btn btn-success btn-large">Sign In</button>
-					<br /> <br /> Message: ${message} <br>
+					<br /> <br /> Message: ${msg} <br>
 					<c:remove var="message" scope="session" />
 				</div>
 				<!-- .actions -->

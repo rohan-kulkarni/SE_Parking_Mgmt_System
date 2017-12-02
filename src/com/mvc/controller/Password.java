@@ -14,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.mvc.util.DBConnection;
 
@@ -55,7 +54,7 @@ public class Password extends HttpServlet {
 			String password1 = request.getParameter("password1");
 			String password2 = request.getParameter("password2");
 			String password = null;
-			HttpSession session= request.getSession();
+			request.getSession();
 			String username = request.getParameter("username");
 			System.out.println(username);
 			
@@ -78,10 +77,6 @@ public class Password extends HttpServlet {
 		        RequestDispatcher rd=request.getRequestDispatcher("/changePassword.jsp");    
 		        rd.include(request,response);
 			}
-			
-//			if (rs.next()) { 
-//				password = rs.getString("password");
-//				} 
 			
 			if (cpassword!= null && password1 != null && password2!= null) {
 				

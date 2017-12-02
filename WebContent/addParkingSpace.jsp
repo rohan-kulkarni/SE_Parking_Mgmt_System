@@ -84,9 +84,8 @@ body {
 							<p>Please provide your details</p>
 							<div class="field">
 								<label for="pName">Parking Name</label> <input type="text"
-									id="pName" name="pName" value=""
-									placeholder="Parking Name" class="login username-field"
-									pattern="[A-Za-z ]{2,}" required />
+									id="pName" name="pName" value="" placeholder="Parking Name"
+									class="login username-field" pattern="[A-Za-z ]{2,}" required />
 							</div>
 
 							<div class="field">
@@ -129,8 +128,8 @@ body {
 						<div class="login-actions">
 							<button type="button" class="btn btn-info" data-toggle="modal"
 								data-target="#myModal">Add Vehicle Spaces</button>
-							<button id="addSpaces" class="button btn btn-success btn-large"
-								disabled="true">Register</button>
+							<button style="float: left; margin-top: 50px;" id="addSpaces"
+								class="button btn btn-success btn-large" disabled="true">Add Space</button>
 						</div>
 						<!-- .actions -->
 

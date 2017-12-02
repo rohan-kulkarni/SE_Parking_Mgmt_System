@@ -4,7 +4,6 @@ package com.anonymous;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,16 +17,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mvc.util.DBConnection;
+
 /**
  * Servlet implementation class AnonymousUser
  */
 @WebServlet("/AnonymousUser")
 public class AnonymousUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	public String DB_URL="jdbc:mysql://localhost:3306/SE_PMS";
-	public String USER = "root";
-	public String PASS = "Admin";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,8 +35,7 @@ public class AnonymousUser extends HttpServlet {
 	public String getData(){
 		String output="";
 		try {
-	         Class.forName("com.mysql.jdbc.Driver");
-	         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+	         Connection conn = DBConnection.createConnection();
 	         Statement stmt = conn.createStatement();
 	         String sql;
 	         sql = "select * from Booking order by B_id  desc";
@@ -91,8 +87,7 @@ public class AnonymousUser extends HttpServlet {
 		String est_exit="00:00";
 		String act_exit="00:00";
 	    try {
-	         Class.forName("com.mysql.jdbc.Driver");
-	         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+	         Connection conn = DBConnection.createConnection();
 	         Statement stmt = conn.createStatement();
 	         String sqlBooking;
 	         sqlBooking="insert into Booking(B_vehicleType,B_date,B_actExit,B_actEntry,B_estExit,B_estEntry,B_contact_no,B_RegNo,B_Name) values('"+type+"','"+todays_date+"','"+act_exit+"','"+entry_time+"','"+est_entry+"','"+est_exit+"','"+contact+"','"+reg+"','"+name+"')";
