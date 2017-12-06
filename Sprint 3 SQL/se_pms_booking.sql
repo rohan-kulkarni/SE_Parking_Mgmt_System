@@ -36,14 +36,14 @@ CREATE TABLE `booking` (
   `B_regNo` varchar(45) DEFAULT NULL,
   `B_name` varchar(45) DEFAULT NULL,
   `B_bookingDate` varchar(45) DEFAULT NULL,
-  `B_bookingtype` varchar(45) DEFAULT NULL,
+  `B_bookingtype` varchar(45) DEFAULT 'OFFLINE',
   `B_flag` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`B_id`,`VehicleOwner_VO_id`,`Parking_P_id`),
   KEY `fk_Booking_VehicleOwner1_idx` (`VehicleOwner_VO_id`),
   KEY `fk_Booking_Parking1_idx` (`Parking_P_id`),
   CONSTRAINT `fk_Booking_Parking1` FOREIGN KEY (`Parking_P_id`) REFERENCES `parking` (`P_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Booking_VehicleOwner1` FOREIGN KEY (`VehicleOwner_VO_id`) REFERENCES `vehicleowner` (`VO_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,7 +52,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (146,'12:00','12:00',NULL,NULL,'2017-12-20','4-Wheeler',1,4,'123456789','NYCH0123','Apoorva Kshirsagar','2017-11-21','ONLINE',1),(147,'12:00','12:00',NULL,NULL,'2017-12-21','4-Wheeler',1,4,'123456789','NYCH0123','Apoorva Kshirsagar','2017-11-21','ONLINE',0),(148,'12:00','12:00',NULL,NULL,'2017-12-22','4-Wheeler',1,4,'123456789','NYCH0123','Apoorva Kshirsagar','2017-11-21','ONLINE',0),(149,'12:00','12:00',NULL,NULL,'2017-12-23','4-Wheeler',1,4,'123456789','NYCH0123','Apoorva Kshirsagar','2017-11-21','ONLINE',0),(150,'12:00','12:00',NULL,NULL,'2017-12-24','4-Wheeler',1,4,'123456789','NYCH0123','Apoorva Kshirsagar','2017-11-21','ONLINE',0),(151,'12:00','12:00',NULL,NULL,'2017-12-25','4-Wheeler',1,4,'123456789','NYCH0123','Apoorva Kshirsagar','2017-11-21','ONLINE',0),(152,'11:00','12:00',NULL,NULL,'2017-12-20','4-Wheeler',1,1,'123456789','NYCH0123','Apoorva Kshirsagar','2017-11-21','ONLINE',1),(153,'11:00','12:00',NULL,NULL,'2017-12-21','4-Wheeler',1,1,'123456789','NYCH0123','Apoorva Kshirsagar','2017-11-21','ONLINE',0),(154,'11:00','12:00',NULL,NULL,'2017-12-22','4-Wheeler',1,1,'123456789','NYCH0123','Apoorva Kshirsagar','2017-11-21','ONLINE',0),(155,'11:00','12:00',NULL,NULL,'2017-12-23','4-Wheeler',1,1,'123456789','NYCH0123','Apoorva Kshirsagar','2017-11-21','ONLINE',0),(156,'11:00','12:00',NULL,NULL,'2017-12-20','4-Wheeler',1,1,'123456789','NYCH0123','Apoorva Kshirsagar','2017-11-20','ONLINE',1),(157,'11:00','12:00','13:36','00:00','2017-12-20','4-Wheeler',1,1,'123456789','NYCH0123','Apoorva Kshirsagar','2017-11-18','ONLINE',1),(158,'00:00','00:00','13:34','00:00','2017-11-21','2-Wheeler',1,1,'8087392227','12345','Rohan',NULL,NULL,0),(159,'00:00','00:00','13:34','00:00','2017-11-21','4-Wheeler',1,1,'8087392227','123456','Harnish',NULL,NULL,0),(160,'12:00','12:00',NULL,NULL,'2017-11-22','4-Wheeler',1,1,'123456789','NYCH012','Apoorva Kshirsagar','2017-11-21','ONLINE',1),(161,'12:00','12:00',NULL,NULL,'2017-11-23','4-Wheeler',1,1,'123456789','NYCH012','Apoorva Kshirsagar','2017-11-21','ONLINE',0),(162,'12:00','12:00','15:37','00:00','2017-12-25','4-Wheeler',1,1,'123456789','NYCH012','Apoorva Kshirsagar','2017-11-21','ONLINE',1),(163,'12:00','12:00',NULL,NULL,'2017-12-26','4-Wheeler',1,1,'123456789','NYCH012','Apoorva Kshirsagar','2017-11-21','ONLINE',0),(164,'12:00','12:00',NULL,NULL,'2017-12-27','4-Wheeler',1,1,'123456789','NYCH012','Apoorva Kshirsagar','2017-11-21','ONLINE',0),(165,'12:00','12:00',NULL,NULL,'2017-12-28','4-Wheeler',1,1,'123456789','NYCH012','Apoorva Kshirsagar','2017-11-21','ONLINE',0);
+INSERT INTO `booking` VALUES (166,'00:00','00:00','17:54','00:00','2017-12-04','2-Wheeler',1,1,'1234567890','123TH','Rohan','2017-12-04','OFFLINE',0),(167,'12:00','12:00',NULL,NULL,'2017-12-12','4-Wheeler',1,1,'123456789','NYCH012','Rahul Sarkar','2017-12-04','ONLINE',1),(168,'12:00','12:00',NULL,NULL,'2017-12-13','4-Wheeler',1,1,'123456789','NYCH012','Rahul Sarkar','2017-12-04','ONLINE',0),(169,'12:00','12:00',NULL,NULL,'2017-12-12','4-Wheeler',1,1,'123456789','NYCH012','Rahul Sarkar','2017-12-04','ONLINE',1),(170,'12:00','12:00',NULL,NULL,'2017-12-13','4-Wheeler',1,1,'123456789','NYCH012','Rahul Sarkar','2017-12-04','ONLINE',0),(171,'12:00','12:00',NULL,NULL,'2017-12-12','4-Wheeler',1,1,'123456789','XYX','Rahul Sarkar','2017-12-04','ONLINE',1),(172,'12:00','12:00',NULL,NULL,'2017-12-13','4-Wheeler',1,1,'123456789','XYX','Rahul Sarkar','2017-12-04','ONLINE',0),(173,'12:00','12:00',NULL,NULL,'2017-12-12','4-Wheeler',1,1,'123456789','NYCH012','Rahul Sarkar','2017-12-04','ONLINE',1),(174,'12:00','12:00',NULL,NULL,'2017-12-13','4-Wheeler',1,1,'123456789','NYCH012','Rahul Sarkar','2017-12-04','ONLINE',0),(175,'00:00','00:00','18:35','00:00','2017-12-04','2-Wheeler',1,1,'5183139192','RK8790','Rohan','2017-12-04','OFFLINE',0),(176,'00:00','00:00','20:05','00:00','2017-12-04','2-Wheeler',1,1,'5183232454','hsdk','rohan','2017-12-04','OFFLINE',0),(177,'00:00','00:00','18:06','00:00','2017-12-05','4-wheeler',1,1,'123456789','11111','Harnish','2017-12-05','OFFLINE',0),(178,'00:00','00:00','18:06','00:00','2017-12-05','4-wheeler',1,1,'1234567890','11111','Harnish','2017-12-05','OFFLINE',0),(179,'00:00','00:00','18:07','00:00','2017-12-05','Truck',1,1,'1111111111','858','AAA','2017-12-05','OFFLINE',0);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -65,4 +65,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-21 17:21:55
+-- Dump completed on 2017-12-05 20:24:09

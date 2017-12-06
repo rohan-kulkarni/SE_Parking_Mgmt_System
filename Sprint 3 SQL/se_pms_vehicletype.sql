@@ -35,7 +35,7 @@ CREATE TABLE `vehicletype` (
 
 LOCK TABLES `vehicletype` WRITE;
 /*!40000 ALTER TABLE `vehicletype` DISABLE KEYS */;
-INSERT INTO `vehicletype` VALUES (2,'4-wheeler'),(3,'Truck'),(4,'Rv'),(5,'Trailor2'),(6,'2-Wheeler');
+INSERT INTO `vehicletype` VALUES (2,'4-wheeler'),(3,'Truck'),(4,'Rv'),(5,'Trailor'),(6,'2-Wheeler');
 /*!40000 ALTER TABLE `vehicletype` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-21 17:21:47
+-- Dump completed on 2017-12-05 20:24:00

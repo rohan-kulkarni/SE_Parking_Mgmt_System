@@ -36,7 +36,7 @@ CREATE TABLE `parking` (
   PRIMARY KEY (`P_id`),
   KEY `Owner_PO_id_idx` (`Owner_PO_id`),
   CONSTRAINT `Owner_PO_id` FOREIGN KEY (`Owner_PO_id`) REFERENCES `parkingowner` (`PO_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `parking` (
 
 LOCK TABLES `parking` WRITE;
 /*!40000 ALTER TABLE `parking` DISABLE KEYS */;
-INSERT INTO `parking` VALUES (1,'UAlbany','NY','Albany','1200 Washinton Ave','12222','6:00','23:00',1,'approved'),(4,'Saint Rose','NY','Albany','470 Western Ave 123','11111','10:00','24:00',1,'approved'),(6,'Delux Parking','CA','LA','200 Main St','11111','6:00','23:00',2,'approved'),(7,'University Plaza','NJ','Parsippany','Littleton Road','11111','6:00','24:00',3,'declined'),(16,'Star Parking','NY','Albany','450 Washington Ave','12200','12:00','23:00',1,'approved'),(17,'Star Parking','NY','Albany','450 Washington Ave','12200','12:00','23:00',1,'pending'),(18,'Crossgates Mall','NY','Albany','Central Avenue','12204','12:00','23:00',1,'pending'),(26,'asd','asd','asd','asd','11111','12:00','23:00',1,'declined'),(28,'asd','asd','asd','asd','11111','12:00','23:00',1,'declined'),(29,'ppp','ppp','ppp','ppp','11114','12:00','23:00',1,'declined'),(30,'ddFfdc','dvjdflkv','jvajskf','afvafjh','12345','12:00','23:00',1,'declined');
+INSERT INTO `parking` VALUES (1,'UAlbany','NY','Albany','1200 Washinton Ave','12222','6:00','23:00',1,'approved'),(4,'Saint Rose','NY','Albany','470 Western Ave 123','11111','10:00','24:00',1,'approved'),(6,'Delux Parking','CA','LA','200 Main St','11111','6:00','23:00',2,'approved'),(16,'Star Parking','NY','Albany','450 Washington Ave','12200','12:00','23:00',1,'pending');
 /*!40000 ALTER TABLE `parking` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-21 17:21:51
+-- Dump completed on 2017-12-05 20:24:04

@@ -6,51 +6,22 @@
 <title>Parking Owner Dashboard</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<link
-	href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
-	rel="stylesheet">
-<link href="css/font-awesome.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/pages/dashboard.css" rel="stylesheet">
+
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Poppins%3A400%2C500%2C600%2C700%2C300&#038;ver=4.8.3'
+	type='text/css' media='all' />
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Montserrat%3A400%2C700&#038;ver=4.8.3'
+	type='text/css' media='all' />
+
 <script src="js/jquery-1.8.2.js" type="text/javascript"></script>
-<script src="js/bootstrap.js" type="text/javascript"></script>
-<script src="js/base.js"></script>
 <style>
-body, h1, h2, h3, h4, h5 {
-	font-family: "Poppins", sans-serif;
-}
-
 body {
-	font-size: 16px;
-}
-
-.table thead th {
-	font-size: large;
-	font-weight: bold;
-	text-align: center
-}
-
-.table tbody td {
-	font-size: medium;
-	text-align: center
+	background: url('img/bodybg.png');
 }
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$.ajax({
-			type : 'POST',
-			url : 'ParkingOwnerDashboard',
-			success : function(response) {
-				if (response != null)
-					console.log(response)
-			},
-			failure : function(error) {
-				console.log(error)
-			}
-		});
 		$.ajax({
 			type : 'GET',
 			url : 'ViewBookingsPO',
@@ -65,53 +36,36 @@ body {
 	});
 </script>
 </head>
-<body>
-	<!-- navbar -->
+<%
+	if (session.getAttribute("username") == null) {
+		response.sendRedirect("index.jsp");
+	}
+%>
+
+<div class="body-content container">
 	<jsp:include page="./parkingHeader.jsp" />
-	<!-- /navbar -->
-	<%
-		request.getAttribute("user_id");
-	%>
-	<div class="main">
-		<div class="main-inner">
-			<div class="container">
-				<div class="row">
-					<div class="span6">
-						<div class="widget widget-nopad">
-						<p>Your Parking Space will be subject to verification. Please submit the documents to<b> SE_team5project@gmail.com</b></p>
-						</div>
+	<p style="font-size: medium; color: black;">
+		Your Parking Space will be subject to verification. Please send the
+		documents to <u><b>SE_team5project@gmail.com</b></u>
+	</p>
 
-					</div>
+	<div class="feature_content col-md-12">
+		<div class="two_col-div row">
 
-					<!-- /widget -->
-					<div id="anonymomusUser">
-					
-					</div>
-						<div id="bookingTable">
-							<h4 id="msg"></h4>
-						</div>
-					<!-- /widget -->
-					<!-- /widget -->
+			<div
+				style="width: 90%; margin-right: 5%; margin-left: 5%; text-align: center; margin-bottom: 65px;">
+
+				<div id="anonymomusUser"></div>
+				<div id="bookingTable">
+					<h4 id="msg"></h4>
 				</div>
-				<!-- /span6 -->
 			</div>
-			<!-- /row -->
 		</div>
-		<!-- /container -->
 	</div>
-	<!-- /main-inner -->
+</div>
 
-	<!-- footer -->
-	<jsp:include page="./footer.jsp" />
-	<!-- /footer -->
+<jsp:include page="./footer.jsp" />
 
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="js/excanvas.min.js"></script>
-	<script src="js/base.js"></script>
-	<script src="js/chart.min.js" type="text/javascript"></script>
-	<script src="js/jquery-1.7.2.min.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/base.js"></script>
-	<!-- /Calendar -->
+<!-- /Calendar -->
 </body>
 </html>

@@ -10,122 +10,115 @@
 <title>Parking Owner Profile</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<link
-	href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
-	rel="stylesheet">
-<link href="css/font-awesome.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/pages/dashboard.css" rel="stylesheet">
-<style>
-body, h1, h2, h3, h4, h5 {
-	font-family: "Poppins", sans-serif;
-}
 
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Poppins%3A400%2C500%2C600%2C700%2C300&#038;ver=4.8.3'
+	type='text/css' media='all' />
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Montserrat%3A400%2C700&#038;ver=4.8.3'
+	type='text/css' media='all' />
+<link href="css/pages/signin.css" rel="stylesheet" type="text/css">
+<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="js/jquery-1.8.2.js" type="text/javascript"></script>
+
+<style type="text/css">
 body {
-	font-size: 16px;
-}
-
-.table thead th {
-	font-size: large;
-	font-weight: bold;
-	text-align: center
-}
-
-.table tbody td {
-	font-size: medium;
-	text-align: center
+	background: url('img/bodybg.png');
 }
 </style>
+<script language="javascript">
+	function fncSubmit() {
 
+		if (document.ChangePasswordForm.OldPassword.value == "") {
+			alert('Please input old password');
+			document.ChangePasswordForm.OldPassword.focus();
+			return false;
+		}
+
+		if (document.ChangePasswordForm.newpassword.value == "") {
+			alert('Please input Password');
+			document.ChangePasswordForm.newpassword.focus();
+			return false;
+		}
+
+		if (document.ChangePasswordForm.conpassword.value == "") {
+			alert('Please input Confirm Password');
+			document.ChangePasswordForm.conpassword.focus();
+			return false;
+		}
+
+		if (document.ChangePasswordForm.newpassword.value != document.ChangePasswordForm.conpassword.value) {
+			alert('Confirm Password Not Match');
+			document.ChangePasswordForm.conpassword.focus();
+			return false;
+		}
+
+		document.ChangePasswordForm.submit();
+	}
+</script>
 
 </head>
-<body>
-	<!-- navbar -->
-	<jsp:include page="./parkingHeader.jsp" />
-	<!-- /navbar -->
+<body class="home blog">
+	<%
+		if (session.getAttribute("username") == null) {
+			response.sendRedirect("index.jsp");
+		}
+	%>
 
+	<div class="body-content container">
+		<jsp:include page="./parkingHeader.jsp" />
 
-	<!-- Main -->
-	<div class="account-container">
-		<h2 align="center">
-			<strong>Change password </strong>
-		</h2>
-		<div class="content clearfix">
-			<script language="javascript">
-				function fncSubmit() {
+		<div class="row home_content_wrapper">
+			<div class="feature_content col-md-12">
+				<div class="two_col-div row">
+					<div class="col-md-3 col-sm-3 feature_box"></div>
+					<div class="col-md-5 col-sm-5">
+						<div class="feature_inner"
+							style="background-color: grey; color: white; height: 400px;">
+							<div class="widget_inner">
+								<p style="font-size: x-large; color: white;">Change password
+								</p>
+								--------------------------------------------------
+								<form name="ChangePasswordForm" method="post"
+									action="processChangePWDPO.jsp" OnSubmit="return fncSubmit();">
+									<div class="login-fields">
 
-					if (document.ChangePasswordForm.OldPassword.value == "") {
-						alert('Please input old password');
-						document.ChangePasswordForm.OldPassword.focus();
-						return false;
-					}
+										<div class="field">
+											<label for="oldpwd" title="oldpassword">Old Password</label>
+											<input type="password" id="OLDpwd" name="OldPassword"
+												title="password" style="width: 400px;"
+												class="login username-field" required />
+										</div>
 
-					if (document.ChangePasswordForm.newpassword.value == "") {
-						alert('Please input Password');
-						document.ChangePasswordForm.newpassword.focus();
-						return false;
-					}
+										<div class="field">
+											<label for="newpwd" title="newpassword">New Password</label>
+											<input type="password" id="newpassword" name="newpassword"
+												title="password" style="width: 400px;"
+												class="login username-field" required />
+										</div>
 
-					if (document.ChangePasswordForm.conpassword.value == "") {
-						alert('Please input Confirm Password');
-						document.ChangePasswordForm.conpassword.focus();
-						return false;
-					}
-
-					if (document.ChangePasswordForm.newpassword.value != document.ChangePasswordForm.conpassword.value) {
-						alert('Confirm Password Not Match');
-						document.ChangePasswordForm.conpassword.focus();
-						return false;
-					}
-
-					document.ChangePasswordForm.submit();
-				}
-			</script>
-			<form name="ChangePasswordForm" method="post"
-				action="processChangePWDPO.jsp" OnSubmit="return fncSubmit();">
-
-				<table border="0" align="center" bgcolor="#2B60DE">
-
-					<tr>
-						<td>Old Password</td>
-						<TD><input name="OldPassword" type="password" id="OLDpwd"
-							size="20" required></td>
-					</tr>
-					<tr>
-						<td>NewPassword</td>
-						<td><input name="newpassword" type="password"
-							id="newpassword" required></td>
-					</tr>
-					<tr>
-						<td>Confirm Password</td>
-						<td><input name="conpassword" type="password"
-							id="conpassword" required></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td><button class="btn btn-primary" type="submit" name="Submit">Save</button></td>
-					</tr>
-
-				</table>
-			</form>
-
+										<div class="field">
+											<label for="conpwd" title="conpassword">Confirm
+												Password</label> <input type="password" id="conpassword"
+												name="conpassword" title="password" style="width: 400px;"
+												class="login username-field" required />
+										</div>
+										<div class="login-actions">
+											<button type="submit"
+												class="btn btn-group-justified btn-large button"
+												style="background-color: #1d3c50; color: white;">Save</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<!-- /content -->
-
 	</div>
-	<!-- /account-container -->
-
-	<!-- /Main -->
-
-
-	<!-- footer -->
 	<jsp:include page="./footer.jsp" />
-	<!-- /footer -->
 
-	<!-- Placed at the end of the document so the pages load faster -->
 	<script>
 		$(document).ready(function() {
 

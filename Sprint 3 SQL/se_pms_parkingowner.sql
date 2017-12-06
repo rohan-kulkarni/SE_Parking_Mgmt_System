@@ -34,7 +34,7 @@ CREATE TABLE `parkingowner` (
   PRIMARY KEY (`PO_id`,`Users_user_id`),
   KEY `fk_ParkingOwner_Users_idx` (`Users_user_id`),
   CONSTRAINT `fk_ParkingOwner_Users` FOREIGN KEY (`Users_user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `parkingowner` (
 
 LOCK TABLES `parkingowner` WRITE;
 /*!40000 ALTER TABLE `parkingowner` DISABLE KEYS */;
-INSERT INTO `parkingowner` VALUES (1,'Rohan Kulkarni','123454574',3,'1400 Washington Ave',NULL,NULL,'12345'),(2,'Preet Patel','9876543210',8,'800 Washungton Ave','new york','NY','12200'),(3,'Harnish Shah','5555555559',11,'468 Western Ave','Albany','NY','12203');
+INSERT INTO `parkingowner` VALUES (1,'Harnish Shah','123454574',3,'468 Washington Ave','Albany','NY','12203'),(2,'Preet Patel','9876543210',8,'800 Washungton Ave','new york','NY','12200');
 /*!40000 ALTER TABLE `parkingowner` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-21 17:21:46
+-- Dump completed on 2017-12-05 20:23:59

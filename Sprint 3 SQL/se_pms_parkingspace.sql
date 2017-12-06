@@ -32,10 +32,12 @@ CREATE TABLE `parkingspace` (
   `Parking_P_id` int(11) NOT NULL,
   `PS_id` int(11) NOT NULL AUTO_INCREMENT,
   `PS_dayCharge` int(11) DEFAULT '8',
+  `vehicle_vt_id` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`PS_id`),
   KEY `Parking_P_id` (`Parking_P_id`),
+  KEY `vehicle_vt_id_idx` (`vehicle_vt_id`),
   CONSTRAINT `Parking_P_id` FOREIGN KEY (`Parking_P_id`) REFERENCES `parking` (`P_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +46,7 @@ CREATE TABLE `parkingspace` (
 
 LOCK TABLES `parkingspace` WRITE;
 /*!40000 ALTER TABLE `parkingspace` DISABLE KEYS */;
-INSERT INTO `parkingspace` VALUES ('2-Wheeler',4,12,3,15,5,1,1,10),('4-Wheeler',250,13,75,16,5,1,2,12),('4-Wheeler',500,10,100,10,5,4,3,5),('2-Wheeler',100,15,10,5,5,4,4,14),('Truck',20,15,5,10,10,6,6,10),('RV',20,15,2,10,5,7,7,20),('2-wheel',1,1,1,1,1,26,21,8),('2-wheel',1,1,1,1,1,26,22,8),('truck',1,1,1,1,1,29,23,8),('2-wheel',1,2,2,3,6,30,24,8);
+INSERT INTO `parkingspace` VALUES ('2-Wheeler',4,12,4,15,5,1,1,10,6),('4-Wheeler',250,13,75,16,5,1,2,12,2),('4-Wheeler',500,10,100,10,5,4,3,5,2),('2-Wheeler',100,15,10,5,5,4,4,14,6),('Truck',20,15,5,10,10,6,6,10,3),('2-Wheeler',200,10,50,15,5,16,26,20,6);
 /*!40000 ALTER TABLE `parkingspace` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-21 17:21:53
+-- Dump completed on 2017-12-05 20:24:07

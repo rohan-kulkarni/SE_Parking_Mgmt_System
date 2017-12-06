@@ -37,7 +37,7 @@ public class AdminLogoutServlet extends HttpServlet {
 		{
 			session.invalidate(); // removes all session attributes bound to the session
 			request.setAttribute("errMessage", "You have logged out successfully");
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/adminLogin.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
 			requestDispatcher.forward(request, response);
 			System.out.println("Logged out");
 		}

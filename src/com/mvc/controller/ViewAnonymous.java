@@ -43,7 +43,8 @@ public class ViewAnonymous extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Get all user");
-		int pId = (int) request.getSession().getAttribute("pId");
+		int pId = (int) request.getSession().getAttribute("parkingID");
+		System.out.println("parking id "+pId);
 		if (request.getParameter("action") != null) {
 			List<AnonymousUser> lstUser = new ArrayList<AnonymousUser>();
 			String action = (String) request.getParameter("action");

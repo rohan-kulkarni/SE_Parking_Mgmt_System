@@ -43,20 +43,22 @@ public class ViewBookingsPO extends HttpServlet {
 		String id = (String) request.getSession().getAttribute("user_id");
 		int userid = Integer.parseInt(id);
 		PrintWriter out = null;
-		System.out.println("aaa");
-		System.out.println(id);
 		try {
 			out = response.getWriter();
 
 			connection = DBConnection.createConnection();
 			statement = connection.createStatement();
+			Statement statement2=connection.createStatement();
 			String sql = "select * from booking inner join parking on booking.Parking_P_id=parking.Owner_PO_id=(select PO_id from parkingowner where Users_user_id="
 					+ userid + ") where parking.Status='approved' group by booking.B_date,booking.B_bookingDate";
 			rSet = statement.executeQuery(sql);
+			ResultSet rset2 = statement2.executeQuery("select P_id from parking where Owner_PO_id=(select PO_Id from parkingowner where Users_user_id="+Integer.parseInt(id)+")");
+			rset2.next();
+			request.getSession().setAttribute("parkingID", rset2.getInt("P_id"));
 
 			output = output + "<table class='table table-striped table-list' height=30px border=1px>";
 			output = output
-					+ "<th>Parking Name</th><th>Customer Name</th><th>Vehicle No</th><th>Booking Date</th><th>Vehicle Type</th><th>Booking Type</th><th></th>";
+					+ "<th>Parking Name</th><th>Customer Name</th><th>Vehicle No</th><th>Booking Date</th><th>Vehicle Type</th><th>Booking Type</th>";
 
 			while (rSet.next()) {
 				output = output + "<tr>";

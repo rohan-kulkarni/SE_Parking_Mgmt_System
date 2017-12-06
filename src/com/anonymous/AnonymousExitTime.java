@@ -53,14 +53,13 @@ public class AnonymousExitTime extends HttpServlet {
 			Connection conn = DBConnection.createConnection();
 			Statement stmt = conn.createStatement();
 			String sql;
-			sql = "select * from Booking where B_regNo='" + id + "' and B_actExit='00:00'";
+			sql = "select * from booking where B_regNo='" + id + "' and B_actExit='00:00'";
 			ResultSet rs = stmt.executeQuery(sql);
 			int parking_id = 0;
 			String B_vehicleType = "";
 			int booking_id = 0;
 			String parkingName = "";
 			String parkingAddress = "";
-			int charge = 0;
 			String name = "";
 			int diffHours = 1;
 			int days = 0;

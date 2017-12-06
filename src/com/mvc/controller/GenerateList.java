@@ -52,7 +52,7 @@ public class GenerateList extends HttpServlet {
 				Connection connection = DBConnection.createConnection();
 				Statement statement = connection.createStatement();
 				
-				ResultSet rSet = statement.executeQuery("Select P_name from parking where Owner_PO_id = (select PO_id from parkingowner where Users_user_id="+user_id+")");
+				ResultSet rSet = statement.executeQuery("Select P_name from parking where Owner_PO_id = (select PO_id from parkingowner where status ='approved' and Users_user_id="+user_id+")");
 				while(rSet.next()) {
 					JSONObject obj = new JSONObject();
 					obj.put("DisplayText", rSet.getString("P_name"));

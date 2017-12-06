@@ -1,230 +1,177 @@
 <!-- RAHUL -->
 <%@page import="java.sql.*"%>
 <%@page import="com.mvc.util.DBConnection"%>
- <html lang="en">
-      <head>  
-      	<meta charset="utf-8">
-		<title>Dashboard</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
-		<link href="css/font-awesome.css" rel="stylesheet">
-		<link href="css/style.css" rel="stylesheet">
-		<link href="css/pages/dashboard.css" rel="stylesheet">
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-		<style>
-   			body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif;}
-   			body {font-size:16px;} 
-   			.table thead th {font-size: large;font-weight: bold;text-align: center}
-   			.table tbody td {font-size: medium;text-align: center}
-		</style>
-      	
-      	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-      	<script language="javascript" type="text/javascript">  
-		      var xmlHttp  
-		      var xmlHttp
-		      function showState(str){
-		      	if (typeof XMLHttpRequest != "undefined"){
-		     		 xmlHttp= new XMLHttpRequest();
-		      }
-		      else if (window.ActiveXObject){
-		     	 xmlHttp= new ActiveXObject("Microsoft.XMLHTTP");
-		      }
-		      if (xmlHttp==null){
-		      	alert("Browser does not support XMLHTTP Request")
-		      	return;
-		      } 
-		      var url="state.jsp";
-		      url +="?count=" +str;
-		      xmlHttp.onreadystatechange = stateChange;
-		      xmlHttp.open("GET", url, true);
-		      xmlHttp.send(null);
-		      }
-		
-		      function stateChange(){   
-		      	if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
-		    	  document.getElementById("state").innerHTML=xmlHttp.responseText   
-		   	   }   
-		      }
-		
-		      function showCity(str){
-		      if (typeof XMLHttpRequest != "undefined"){
-		        xmlHttp= new XMLHttpRequest();
-		        }
-		      else if (window.ActiveXObject){
-		        xmlHttp= new ActiveXObject("Microsoft.XMLHTTP");
-		        }
-		      if (xmlHttp==null){
-		      alert("Browser does not support XMLHTTP Request")
-		      return;
-		      } 
-		      var url="city.jsp";
-		      url +="?count=" +str;
-		      xmlHttp.onreadystatechange = stateChange1;
-		      xmlHttp.open("GET", url, true);
-		      xmlHttp.send(null);
-		      }
-		      function stateChange1(){   
-		     	 if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
-		     		 document.getElementById("city").innerHTML=xmlHttp.responseText   
-		      }   
-		      }
-      
-      
-		      $(document).ready(function() {
-			    	$.ajax({
-		  			type : 'GET',
-		  			url : 'Parkinglocator',
-		  			success : function(responseText) {
-		  				$('#responseNote').html(responseText);
-		  			}
-		  		});
-			   $('#submit').click(function() {
-			    	//	var state = $('#state').val();
-			    	//	var city = $('#city').val();
-			    		$.ajax({
-			    			type : 'POST',
-			    			url : 'Parkinglocator',
-			    		//	data: {
-			    		//		state : state,
-			    		//		city : city,
-			    				
-			    		//	},
-			    			success : function(responseText) {
-			    				
-			    				$('#responseNote').html(responseText);
-			    			}
-			    		});
-			    	});
-				});
-      
-      
-      </script>  
-  </head>  
-  <body>  
-  
-  		<%
-				if(session.getAttribute("username")==null){
-					
-					response.sendRedirect("login.jsp");
-					
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Vehicle Owner</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Poppins%3A400%2C500%2C600%2C700%2C300&#038;ver=4.8.3'
+	type='text/css' media='all' />
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Montserrat%3A400%2C700&#038;ver=4.8.3'
+	type='text/css' media='all' />
+<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="js/jquery-1.8.2.js" type="text/javascript"></script>
+<script src="js/bootstrap.js" type="text/javascript"></script>
+<style>
+body {
+	background: url('img/bodybg.png');
+}
+</style>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script language="javascript" type="text/javascript">
+	var xmlHttp
+	var xmlHttp
+	function showState(str) {
+		if (typeof XMLHttpRequest != "undefined") {
+			xmlHttp = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		if (xmlHttp == null) {
+			alert("Browser does not support XMLHTTP Request")
+			return;
+		}
+		var url = "state.jsp";
+		url += "?count=" + str;
+		xmlHttp.onreadystatechange = stateChange;
+		xmlHttp.open("GET", url, true);
+		xmlHttp.send(null);
+	}
+
+	function stateChange() {
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			document.getElementById("state").innerHTML = xmlHttp.responseText
+		}
+	}
+
+	function showCity(str) {
+		if (typeof XMLHttpRequest != "undefined") {
+			xmlHttp = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		if (xmlHttp == null) {
+			alert("Browser does not support XMLHTTP Request")
+			return;
+		}
+		var url = "city.jsp";
+		url += "?count=" + str;
+		xmlHttp.onreadystatechange = stateChange1;
+		xmlHttp.open("GET", url, true);
+		xmlHttp.send(null);
+	}
+	function stateChange1() {
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			document.getElementById("city").innerHTML = xmlHttp.responseText
+		}
+	}
+
+	$(document).ready(function() {
+		$.ajax({
+			type : 'GET',
+			url : 'Parkinglocator',
+			success : function(responseText) {
+				$('#responseNote').html(responseText);
+			}
+		});
+		$('#submit').click(function() {
+			//	var state = $('#state').val();
+			//	var city = $('#city').val();
+			$.ajax({
+				type : 'POST',
+				url : 'Parkinglocator',
+				success : function(responseText) {
+
+					$('#responseNote').html(responseText);
 				}
-			
-			%>
-	
-	
-	<!-- navbar -->
-			<jsp:include page="./vehicleOwnerHeader.jsp"/>
-			<!-- /navbar -->
-			
-			<div class="subnavbar">
-				  <div class="subnavbar-inner">
-				    <div class="container">
-				      <ul class="mainnav">
-				        <li class=""><a href="vehicleOwnerDashboard.jsp"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-				            <li><a href="Profile.jsp"><i class="fa fa-address-card"></i><span>Edit Profile</span></a></li>
-				       		<li><a href="changePassword.jsp"><i class="fa fa-thumb-tack"></i><span>Change Password</span></a> </li>
-				            <li ><a href="bookparking.jsp"><i class="fa fa-braille"></i><span>Book Parking Space</span></a> </li>
-				            <li ><a href="yourBookings.jsp"><i class="fa fa-clipboard"></i><span>Your Bookings</span></a> </li>
-				            <li ><a href="manageVehicle.jsp"><i class="fa fa-automobile"></i><span>Manage Vehicles </span></a> </li>
-				            <li class="active"><a href="parkingLocator.jsp"><i class="fa fa-location-arrow"></i><span>Parking Locator</span> </a> </li>
-				      </ul>
-				    </div>
-				    <!-- /container --> 
-				  </div>
-				  <!-- /subnavbar-inner --> 
+			});
+		});
+	});
+</script>
+</head>
+<body class="home blog">
+
+	<%
+		if (session.getAttribute("username") == null) {
+			response.sendRedirect("index.jsp");
+		}
+	%>
+
+	<div class="body-content container">
+		<jsp:include page="./vehicleOwnerHeader.jsp" />
+
+		<div class="row home_content_wrapper">
+			<div class="feature_content col-md-12">
+				<div class="two_col-div row">
+
+					<div class="col-md-4 col-sm-4">
+						<div class="feature_inner" style="color: black; height: inherit;">
+							<div class="widget_inner">
+								<h3>Book Parking Space</h3>
+							</div>
+							<form action="parkingLocatorResult.jsp" method="post">
+
+								<table border="1">
+									<tr>
+										<th>State</th>
+										<th>City</th>
+									</tr>
+									<tr>
+										<td><select name="country" style="width: 120px;"
+											onchange="showState(this.value)">
+												<option value="none">Select</option>
+												<%
+													Connection con = DBConnection.createConnection();
+													Statement stmt = con.createStatement();
+													ResultSet rs = stmt.executeQuery("Select distinct p_state from parking");
+													while (rs.next()) {
+												%>
+												<option value="<%=rs.getString("p_state")%>"><%=rs.getString("p_state")%></option>
+												<%
+													}
+												%>
+										</select></td>
+										<td id='state'><select name='state' style="width: 120px;">
+												<option value='Select'></option>
+										</select></td>
+									</tr>
+								</table>
+
+								<div class="login-actions">
+									<button type="submit" class="btn btn-primary" id="submit"
+										style="margin-top: 30px; width: 150px;">Search</button>
+									<button class="btn" type="reset"
+										style="margin-top: 30px; width: 150px;">Reset</button>
+								</div>
+
+							</form>
+
+						</div>
+					</div>
+					<div class="col-md-8 col-sm-8">
+						<div class="feature_inner" style="color: black; height: inherit;">
+							<div class="widget_inner">
+								<h3>Available Parking Space</h3>
+							</div>
+							<div id="responseNote"></div>
+						</div>
+					</div>
+
+
 				</div>
-				<!-- /subnavbar -->
-			
-				<div class="main">
-	
-					<div class="main-inner">
-					
-					    <div class="container">
-					
-					      <div class="row">
-					      	
-					      	<div class="span12">      		
-					     		
-					      		<div class="widget ">
-					     			
-					      			<div class="widget-header">
-					      				<i class="icon-user"></i>
-					      				<h3>Parking Locator</h3>
-					  				</div> <!-- /widget-header -->
-										
-									<div class="widget-content">
-															
-										<div class="tabbable">
-													
-										<br>
-										
-										<div class="tab-content">
-  
-  											<form action="parkingLocatorResult.jsp" method="post" class="form-horizontal">
-										      <table border="1">
-										      <tr><th>State</th><th>City</th></tr>
-										      <tr><td>
-										      <select name="country" onchange="showState(this.value)">  
-										       <option value="none">Select</option>  
-										    <%
-												 Connection con = DBConnection.createConnection();  
-												 Statement stmt = con.createStatement();  
-												 ResultSet rs = stmt.executeQuery("Select distinct p_state from parking");
-												 while(rs.next()){
-										     %>
-										      <option value="<%=rs.getString("p_state")%>"><%=rs.getString("p_state")%></option>  
-										      <%
-										 }
-										     %>
-										      </select> 
-										      </td>
-										      <td id='state'><select name='state' >  
-										      <option value='-1'></option>  
-										      </select>
-										      </td>
-										      </tr>
-										      </table>
-										      <div class="form-actions">
-																<button type="submit" class="btn btn-primary" id="submit">Search</button> 
-																<button class="btn" type="reset">Reset</button>
-															</div>
-										      
-										      </form>
-												</div>
-													
-													
-														
-											  
-											</div>
-																	
-										</div> <!-- /widget-content -->
-									<div class="widget-header">
-					      				<i class="icon-user"></i>
-					      				<h3>Available Parking Space</h3>
-					  				</div>	
-									 <div id="responseNote"></div>
-									</div> <!-- /widget -->
-						      		
-							    </div> <!-- /span8 -->
-						      	
-						      	</div>
-						      	
-						      	</div>
-						      	
-						      	
-						      </div> <!-- /row -->
-						
-						    </div> <!-- /container -->
-						    
-						</div> <!-- /main-inner -->
-					    
-					</div> <!-- /main -->
-			<!-- footer -->
-			<jsp:include page="./footer.jsp"/>
-			<!-- /footer --> 
+			</div>
+		</div>
+	</div>
+
+	<jsp:include page="./footer.jsp" />
+	<!-- /footer -->
 </body>
 
 

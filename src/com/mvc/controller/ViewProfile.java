@@ -7,10 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.mvc.util.DBConnection;
 
 /**
  * Servlet implementation class ViewProfile
@@ -39,13 +42,19 @@ public class ViewProfile extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String name = request.getParameter("name");
+		String name = (String) request.getSession().getAttribute("uName");
+		System.out.println("Name is ");
+		System.out.println(name);
 		int u_id;
 		try {
-			res = stmt.executeQuery("select * from parkingowner where PO_fullName='"+name+"'");
+			conn = DBConnection.createConnection();
+			stmt=conn.createStatement();
+			String sql="select * from parkingowner where PO_fullName='"+name+"'";
+			System.out.println(sql);
+			res = stmt.executeQuery(sql);
 			res.next();
 			u_id=res.getInt("Users_user_id");
 			contactno=res.getString("PO_contactNo");

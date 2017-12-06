@@ -40,7 +40,7 @@ CREATE TABLE `vehicle` (
 
 LOCK TABLES `vehicle` WRITE;
 /*!40000 ALTER TABLE `vehicle` DISABLE KEYS */;
-INSERT INTO `vehicle` VALUES ('4-Wheeler','NYCH012',1,'Mustang',1),('4-Wheeler','XYX',1,'ZBX',0);
+INSERT INTO `vehicle` VALUES ('Truck','asd',1,'asdaq',0),('4-Wheeler','NYCH012',1,'Mustang',1),('4-Wheel','XX250',1,'CHEVY',0),('4-Wheeler','XYX',1,'ZBX',0);
 /*!40000 ALTER TABLE `vehicle` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-21 17:21:54
+-- Dump completed on 2017-12-05 20:24:08

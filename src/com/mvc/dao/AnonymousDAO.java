@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.mvc.bean.AnonymousUser;
 import com.mvc.util.DBConnection;
+import com.mvc.util.EncryptPassword;
 
 public class AnonymousDAO {
 
@@ -77,7 +78,7 @@ public class AnonymousDAO {
 			PreparedStatement pst2 = connection.prepareStatement("insert into anonymoususer (Users_user_id,AU_fullname,AU_contactNo,AU_parkingName,Parking_P_id) values((select user_id from users where username=?),?,?,?,(select P_id from parking where P_name=?))");
 			
 			pst1.setString(1, user.getEmail());
-			pst1.setString(2, user.getPassword());
+			pst1.setString(2, EncryptPassword.encryption(user.getPassword()));
 			pst1.setString(3, "anonymous");
 			
 			pst2.setString(1, user.getEmail());

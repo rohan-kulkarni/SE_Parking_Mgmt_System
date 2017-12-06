@@ -5,33 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Add Parking Space</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<link
-	href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
-	rel="stylesheet">
-<link href="css/font-awesome.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/pages/dashboard.css" rel="stylesheet">
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Poppins%3A400%2C500%2C600%2C700%2C300&#038;ver=4.8.3'
+	type='text/css' media='all' />
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Montserrat%3A400%2C700&#038;ver=4.8.3'
+	type='text/css' media='all' />
 <script src="js/jquery-1.8.2.js" type="text/javascript"></script>
 <style>
-body, h1, h2, h3, h4, h5 {
-	font-family: "Poppins", sans-serif;
-}
-
 body {
-	font-size: 16px;
-}
-
-.table thead th {
-	font-size: large;
-	font-weight: bold;
-	text-align: center
-}
-
-.table tbody td {
-	font-size: medium;
-	text-align: center
+	background: url('img/bodybg.png');
 }
 </style>
 <script type="text/javascript">
@@ -71,41 +54,37 @@ body {
 	});
 </script>
 </head>
-<body>
-	<!-- navbar -->
-	<jsp:include page="./parkingHeader.jsp" />
-	<!-- /navbar -->
+<body class="home blog">
+	<%
+		if (session.getAttribute("username") == null) {
+			response.sendRedirect("index.jsp");
+		}
+	%>
 
+	<div class="body-content container">
+		<jsp:include page="./parkingHeader.jsp" />
 
-	<!-- Main -->
+		<div class="feature_content col-md-12">
+			<div class="two_col-div row">
 
-	<div class="main">
-		<div class="main-inner">
-			<div class="container">
-				<div class="row">
-					<!-- /widget -->
-					<div class="widget widget-table action-table">
-						<!-- /widget-header -->
-						<div id="parkingSpace">
-							<h4 id="msg"></h4>
-						</div>
-						<!-- /widget-content -->
+				<div
+					style="width: 90%; margin-right: 5%; margin-left: 5%; text-align: center; margin-bottom: 65px;">
+
+					<!-- /widget-header -->
+					<div id="parkingSpace">
+						<h4 id="msg"></h4>
+
 					</div>
 					<div>
 						<a href="addParkingSpace.jsp" class="btn btn-primary">Add New
 							Space</a>
 					</div>
-					<!-- /widget -->
-					<!-- /widget -->
 				</div>
 				<div class="row"></div>
 				<!-- /span6 -->
 			</div>
-			<!-- /row -->
 		</div>
-		<!-- /container -->
 	</div>
-
 
 	<!-- /Main -->
 
@@ -114,14 +93,10 @@ body {
 	<jsp:include page="./footer.jsp" />
 	<!-- /footer -->
 	<script type="text/javascript">
-	function editRecord(id) {
-		/* var f = document.form;
-		f.method = "post";
-		f.action = 'viewParkingSpace.jsp?id=' + id;
-		f.submit(); */
-		document.location = 'editParkingSpace.jsp?id=' + id;
-	}
-	
+		function editRecord(id) {
+
+			document.location = 'editParkingSpace.jsp?id=' + id;
+		}
 	</script>
 	<!-- Placed at the end of the document so the pages load faster -->
 

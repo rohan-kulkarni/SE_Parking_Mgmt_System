@@ -61,7 +61,8 @@ public class VehicleManagementServlet extends HttpServlet {
 			response.setContentType("application/json");
 			if (action.equals("list")) {
 				try {
-					lstUser = dao.getAllUsers();
+					String id=request.getSession().getAttribute("username").toString();
+					lstUser = dao.getAllUsers(id);
 					JsonElement element = gson.toJsonTree(lstUser, new TypeToken<List<VehicleManagement>>() {
 					}.getType());
 					JsonArray jsonArray = element.getAsJsonArray();

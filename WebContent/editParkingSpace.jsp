@@ -5,40 +5,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Edit Parking Space</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<link
-	href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
-	rel="stylesheet">
-<link href="css/font-awesome.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/pages/dashboard.css" rel="stylesheet">
+
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Poppins%3A400%2C500%2C600%2C700%2C300&#038;ver=4.8.3'
+	type='text/css' media='all' />
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Montserrat%3A400%2C700&#038;ver=4.8.3'
+	type='text/css' media='all' />
 <link href="css/metro/crimson/jtable.css" rel="stylesheet"
 	type="text/css" />
 <link href="css/jquery-ui-1.10.3.custom.css" rel="stylesheet"
 	type="text/css" />
+<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
 <script src="js/jquery-1.8.2.js" type="text/javascript"></script>
 <script src="js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
 <script src="js/jquery.jtable.js" type="text/javascript"></script>
 
 <style>
-body, h1, h2, h3, h4, h5 {
-	font-family: "Poppins", sans-serif;
-}
-
 body {
-	font-size: 16px;
-}
-
-.table thead th {
-	font-size: large;
-	font-weight: bold;
-	text-align: center
-}
-
-.table tbody td {
-	font-size: medium;
-	text-align: center
+	background: url('img/bodybg.png');
 }
 </style>
 <script type="text/javascript">
@@ -92,7 +77,7 @@ body {
 					title : 'Parking Space ID',
 					edit : false,
 					list : false,
-					key:true
+					key : true
 				}
 			}
 		});
@@ -102,28 +87,32 @@ body {
 </script>
 
 </head>
-<body>
+<body class="home blog">
+	<%
+		if (session.getAttribute("username") == null) {
+			response.sendRedirect("index.jsp");
+		}
+	%>
 
-	<!-- navbar -->
-	<jsp:include page="./parkingHeader.jsp" />
-	<!-- /navbar -->
+	<div class="body-content container">
+		<jsp:include page="./parkingHeader.jsp" />
 
+		<div class="feature_content col-md-12">
+			<div class="two_col-div row">
 
-	<!-- Main -->
+				<div
+					style="width: 90%; margin-right: 5%; margin-left: 5%; text-align: center; margin-bottom: 65px;">
 
-	<div class="main">
-		<div class="main-inner">
-			<div class="container">
-				<div id="parkingSpaces"></div>
-				<form action="editParkingSpace?action=deleteEntry&pId=0">
-					<button type="submit" class="btn">Delete Parking Space</button>
-				</form>
+					<div id="parkingSpaces"></div>
+					<form action="editParkingSpace?action=deleteEntry&pId=0">
+						<button type="submit" class="btn">Delete Parking Space</button>
+					</form>
+				</div>
+				<!-- /row -->
 			</div>
-			<!-- /row -->
-		</div>
-		<!-- /container -->
-	</div>
 
+		</div>
+	</div>
 
 	<!-- /Main -->
 
@@ -131,8 +120,6 @@ body {
 	<!-- footer -->
 	<jsp:include page="./footer.jsp" />
 	<!-- /footer -->
-	<script src="js/jquery-1.8.2.js" type="text/javascript"></script>
-	<script src="js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
-	<script src="js/jquery.jtable.js" type="text/javascript"></script>
+
 </body>
 </html>

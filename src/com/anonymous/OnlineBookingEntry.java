@@ -41,7 +41,7 @@ public class OnlineBookingEntry extends HttpServlet {
 	         sql = "select * from Booking order by B_id  desc";
 	         ResultSet rs = stmt.executeQuery(sql);
 	         output=output+"<table class='table table-striped table-list' height=30px border=1px>";
-	         output=output+"<th>Date</th><th>Booking Id</th><th>Entry Time</th><th>Vehicle Type</th><th>Registration Number</th><th>Contact Number</th><th>Name</th>";
+	         output=output+"<th>Date</th><th>Booking Id</th><th>Entry Time</th><th>Vehicle Type</th><th>Registration Number</th><th>Contact Number</th><th>QR Code</th><th>Name</th>";
 	         while(rs.next()){
 	        	 	output=output+"<tr>";
 	        	 	int B_id  = rs.getInt("B_id");
@@ -51,7 +51,7 @@ public class OnlineBookingEntry extends HttpServlet {
 	        	 	String contact  = rs.getString("B_contact_no");
 	        	 	String Name  = rs.getString("B_Name");
 	        	 	String RegNo  = rs.getString("B_RegNo");
-	        	 	output=output+"<td>"+B_date+"</td><td>"+B_id+"</td><td>"+B_actEntry+"</td><td>"+B_vehicleType+"</td><td>"+RegNo+"</td><td>"+contact+"</td><td>"+Name+"</td>";
+	        	 	output=output+"<td>"+B_date+"</td><td>"+B_id+"</td><td>"+B_actEntry+"</td><td>"+B_vehicleType+"</td><td>"+RegNo+"</td><img alt='' src='https://chart.googleapis.com/chart?cht=qr&chl="+RegNo+"&chs=50x50&chld=L|0 '><td>"+contact+"</td><td>"+Name+"</td>";
 	        	 	output=output+"</tr>";
 	         }
 	         output=output+"</table>";

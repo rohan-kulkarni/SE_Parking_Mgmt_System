@@ -42,8 +42,6 @@ public class ViewParkingSpace extends HttpServlet {
 		String output = "";
 		String id = (String) request.getSession().getAttribute("user_id");
 		PrintWriter out = null;
-		System.out.println("aaa");
-		System.out.println(id);
 		try {
 			out = response.getWriter();
 
@@ -53,7 +51,7 @@ public class ViewParkingSpace extends HttpServlet {
 			rSet = statement.executeQuery(sql);
 
 			output = output + "<table class='table table-striped table-list' height=30px border=1px>";
-			output = output + "<th>Parking Name</th><th>Address</th><th>State</th><th>City</th><th>Zip</th><th></th>";
+			output = output + "<th>Parking Name</th><th>Address</th><th>State</th><th>City</th><th>Zip</th><th>Action</th>";
 
 			while (rSet.next()) {
 				output = output + "<tr>";

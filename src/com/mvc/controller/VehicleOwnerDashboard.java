@@ -52,8 +52,6 @@ public class VehicleOwnerDashboard extends HttpServlet {
 		String output = "";
 		String id = (String) request.getSession().getAttribute("user_id");
 		PrintWriter out = null;
-		System.out.println("aaa");
-		System.out.println(id);
 		try {
 			out = response.getWriter();
 

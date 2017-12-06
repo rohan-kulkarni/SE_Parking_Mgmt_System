@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.mvc.bean.LoginBean;
 import com.mvc.dao.LoginDao;
+import com.mvc.util.EncryptPassword;
 
 public class LoginServlet extends HttpServlet 
 	{
@@ -16,31 +17,10 @@ public class LoginServlet extends HttpServlet
 		{
 			// TODO Auto-generated method stub
 			
-			/*String uname = request.getParameter("username");
-			String password = request.getParameter("password");
-			
-			LoginBean loginbean=new LoginBean();
-			loginbean.setUserName(uname);
-			loginbean.setPassword(password);
-			
-			LoginDao logindao=new LoginDao();
-			String validateUser=logindao.authenticateUser(loginbean);
-			if (validateUser.equals("SUCCESS"))
-			{
-				request.setAttribute("userName",uname);
-				request.getRequestDispatcher("/adminDashboard.jsp").forward(request, response);;
-			}
-			else
-			{
-				request.setAttribute("errMessage",validateUser);
-				request.getRequestDispatcher("/login.jsp").forward(request,response);
-			}
-
-			HttpSession session = request.getSession();
-			session.setAttribute("username", uname);*/
 			
 			String username = request.getParameter("username");
-			String password = request.getParameter("password");
+			String password = EncryptPassword.encryption(request.getParameter("password"));
+			System.out.println("Encrypt Admin: "+password);
 			
 			LoginBean loginbean=new LoginBean();
 			loginbean.setUserName(username);

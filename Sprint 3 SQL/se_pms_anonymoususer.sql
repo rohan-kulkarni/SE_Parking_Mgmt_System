@@ -33,7 +33,7 @@ CREATE TABLE `anonymoususer` (
   KEY `fk_AnonymousUser_Users1_idx` (`Users_user_id`),
   KEY `Parking_P_Id_idx` (`Parking_P_id`),
   CONSTRAINT `fk_AnonymousUser_Users1` FOREIGN KEY (`Users_user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `anonymoususer` (
 
 LOCK TABLES `anonymoususer` WRITE;
 /*!40000 ALTER TABLE `anonymoususer` DISABLE KEYS */;
-INSERT INTO `anonymoususer` VALUES (1,'Preet Parikh','123456789',5,'UAlbany',1),(4,'Harnish','1234567890',22,'UAlbany',1);
+INSERT INTO `anonymoususer` VALUES (1,'Preet Parikh','123456789',5,'UAlbany',1),(4,'Harnish','1234567890',22,'UAlbany',1),(5,'AAA','1234567890',27,'UAlbany',1);
 /*!40000 ALTER TABLE `anonymoususer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-21 17:21:52
+-- Dump completed on 2017-12-05 20:24:05

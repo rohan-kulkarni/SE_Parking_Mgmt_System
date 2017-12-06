@@ -11,15 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Properties;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,8 +23,7 @@ import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
 import com.mvc.util.DBConnection;
-
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
+import com.mvc.util.SendEmail;
 
 /**
  * Servlet implementation class Bookparking
@@ -46,44 +37,6 @@ public class Bookparking extends HttpServlet {
 	public Bookparking() {
 		super();
 
-	}
-
-	public void send(String email, String data) {
-		// TODO Auto-generated method stub
-		final String username1 = "SEteam5project@gmail.com";
-		final String password = "SE12345@";
-
-		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.socketFactory.port", "465");
-		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.port", "465");
-
-		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username1, password);
-			}
-		});
-
-		try {
-			String dataarray[] = data.split(",");
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("from-email@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-			message.setSubject("Booking Confirmation");
-
-			message.setText("Dear " + dataarray[0] + "," + "\n\n Your booking id " + dataarray[6]
-					+ " has been recieved and confirmed at \n Parking Location: " + dataarray[3] + "\n In Time: "
-					+ dataarray[4] + "\nOut Time:" + dataarray[5] + "\n");
-
-			Transport.send(message);
-
-			System.out.println("Done");
-
-		} catch (MessagingException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -224,7 +177,6 @@ public class Bookparking extends HttpServlet {
 
 					for (int i = 1; i <= diffDate; i++) {
 						System.out.println(d1.toString());
-
 						sql = "insert into booking(b_estentry,b_estexit,b_date,b_vehicletype,vehicleowner_vo_id,parking_p_id,b_contact_no,b_regno,b_name,b_bookingtype,B_bookingDate) values(?,?,?,?,?,?,?,?,?,?,?)";
 						ps = conn.prepareStatement(sql);
 						ps.setString(1, entrydate[1]);
@@ -251,20 +203,23 @@ public class Bookparking extends HttpServlet {
 					// SendEmail email=new SendEmail();
 					String data = "";
 					data = name + "," + contact + "," + regno + "," + parkingname + "," + datefor + "," + dateforex
-							+ "," + bid;
+							+ "," + bid +","+regno;
 					System.out.println(data + username);
-					out.print("<p style=\"color:Green\">Booking Successful!!</p>");
+					out.print("<html><head>");
+					out.print("<script type=\"text/javascript\">alert(\"Booking Successful\");</script>");
+					out.print("</head><body></body></html>");
 					RequestDispatcher rd = request.getRequestDispatcher("/bookparking.jsp");
 					rd.include(request, response);
-					send(username, data);
+					SendEmail.send(username, data);
 					st.close();
 					conn.close();
 
 				} else {
 					System.out.println(
 							"No Slots availble between the dates you have choosen. Please change the dates and try Again.");
-					out.print(
-							"<p style=\"color:red\">No Slots availble between the dates you have choosen. Please change the dates and try Again.</p>");
+					out.print("<html><head>");
+					out.print("<script type=\"text/javascript\">alert(\"No Slots availble between the dates you have choosen. Please change the dates and try Again.\");</script>");
+					out.print("</head><body></body></html>");
 					RequestDispatcher rd = request.getRequestDispatcher("/bookparking.jsp");
 					rd.include(request, response);
 				}

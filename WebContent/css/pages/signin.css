@@ -12,7 +12,7 @@ body {
 .account-container {
 	width: 380px;
 	display: block;
-	margin: 60px auto 0 auto;
+	margin: 15px auto 0 auto;
 	background: #f9f9f9;
 	border: 1px solid #d5d5d5;
 	-webkit-border-radius: 5px;
@@ -33,42 +33,28 @@ body {
 	margin-bottom: 1.25em;
 }
 
-.login-fields label {
-	display: none;
-}
+
 
 .login-fields input {
-	font-family: 'Open Sans';
-	font-size: 13px;
 	color: #49635c;
-	padding: 11px 15px 10px 50px;
+	padding: 11px 15px 10px 15px;
 	background-color: #fdfdfd;
-	width: 255px;
+	width: 305px;
+	height: 35px;
 	display: block;
 	margin: 0;
-	box-shadow: inset 2px 2px 4px #f1f1f1;
 }
 
 .select-input {
-	font-family: 'Open Sans';
-	font-size: 13px;
 	color: #49635c;
-	padding: 4px 15px 4px 15px;
+	padding: 4px 15px 4px 0px;
 	background-color: #fdfdfd;
 	width: 322px;
 	display: block;
 	margin: 0;
 	box-shadow: inset 2px 2px 4px #f1f1f1;
-	height: 40px;
+	height: 35px;
 	width: -webkit-fill-available;
-}
-
-.username-field {
-	background: url(../../img/signin/user.png) no-repeat;
-}
-
-.password-field {
-	background: url(../../img/signin/password.png) no-repeat;
 }
 
 .login-actions {

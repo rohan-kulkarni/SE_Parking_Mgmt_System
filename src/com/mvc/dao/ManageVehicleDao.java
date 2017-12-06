@@ -56,11 +56,16 @@ private Connection conn;
 		try
 		{
 			String query="update vehicletype set type=? where vt_id=?";
+			String query2="update parkingspace set PS_vehicleType=? where vehicle_vt_id=?";
+			
 			PreparedStatement pstmt=conn.prepareStatement(query);
 			pstmt.setString(1, vehicle.getVehicleType());
 			pstmt.setInt(2, vehicle.getVehicleType_id());
 			pstmt.executeUpdate();
-			System.out.println("In update");
+			PreparedStatement pstmt2=conn.prepareStatement(query2);
+			pstmt2.setString(1, vehicle.getVehicleType());
+			pstmt2.setInt(2, vehicle.getVehicleType_id());
+			pstmt2.executeUpdate();
 		}
 		catch(SQLException e)
 		{

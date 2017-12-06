@@ -3,6 +3,7 @@ package com.mvc.dao;
 import java.sql.*;
 
 import com.mvc.util.DBConnection;
+import com.mvc.util.SendEmail;
 
 public class ActionSpaceDao {
 
@@ -17,12 +18,27 @@ public class ActionSpaceDao {
 	{
 		try 
 		{
-			String query="update parking set Status=? where P_id=?";
-			PreparedStatement pstmt=conn.prepareStatement(query);
-			pstmt.setString(1, "approved");
-			pstmt.setInt(2, p_id);
-			pstmt.executeUpdate();
+			String username="";
+			String parkingName="";
+			String poname="";
+			String query2="select u.username,po.PO_fullName,p.P_name from users u,parkingowner po,parking p where p.Owner_PO_id=po.PO_id and po.Users_user_id=u.user_id and p.P_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(query2);
+			pstmt.setInt(1, p_id );
+			ResultSet rs=pstmt.executeQuery();
+			if(rs.next())
+			{
+				username=rs.getString("username");
+				poname=rs.getString("PO_fullName");
+				parkingName=rs.getString("P_name");
+			}
 			
+			String query="update parking set Status=? where P_id=?";
+			PreparedStatement pstmt2=conn.prepareStatement(query);
+			pstmt2.setString(1, "approved");
+			pstmt2.setInt(2, p_id);
+			pstmt2.executeUpdate();
+			SendEmail.sendApproval(username, parkingName,poname);
+		
 			System.out.println("Request approved");
 			return;
 		} 
@@ -36,11 +52,25 @@ public class ActionSpaceDao {
 	{
 		try 
 		{
+			String username="";
+			String parkingName="";
+			String poname="";
+			String query2="select u.username,po.PO_fullName,p.P_name from users u,parkingowner po,parking p where p.Owner_PO_id=po.PO_id and po.Users_user_id=u.user_id and p.P_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(query2);
+			pstmt.setInt(1, p_id );
+			ResultSet rs=pstmt.executeQuery();
+			if(rs.next())
+			{
+				username=rs.getString("username");
+				poname=rs.getString("PO_fullName");
+				parkingName=rs.getString("P_name");
+			}
 			String query="update parking set Status=? where P_id=?";
-			PreparedStatement pstmt=conn.prepareStatement(query);
-			pstmt.setString(1, "declined");
-			pstmt.setInt(2, p_id);
-			pstmt.executeUpdate();
+			PreparedStatement pstmt2=conn.prepareStatement(query);
+			pstmt2.setString(1, "declined");
+			pstmt2.setInt(2, p_id);
+			pstmt2.executeUpdate();
+			SendEmail.sendDenial(username, parkingName,poname);
 			
 			System.out.println("Request declined");
 		} 

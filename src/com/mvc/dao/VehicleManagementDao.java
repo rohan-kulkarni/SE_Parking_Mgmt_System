@@ -31,11 +31,11 @@ public class VehicleManagementDao {
 		}
 	}
 
-	public List<VehicleManagement> getAllUsers() {
+	public List<VehicleManagement> getAllUsers(String id) {
 		System.out.println("In getAllUsers");
 		List<VehicleManagement> vehicles = new ArrayList<VehicleManagement>();
 		try {
-			String query = "select * from vehicle";
+			String query = "SELECT * FROM se_pms.users ,se_pms.vehicle,vehicleowner where vehicle.VehicleOwner_VO_id=vehicleowner.VO_id and vehicleowner.Users_user_id=users.user_id and username='"+ id +"' ";
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {

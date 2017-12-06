@@ -43,8 +43,6 @@ public class ManagePOBookings extends HttpServlet {
 		String id = (String) request.getSession().getAttribute("user_id");
 		int userid = Integer.parseInt(id);
 		PrintWriter out = null;
-		System.out.println("aaa");
-		System.out.println(id);
 		try {
 			out = response.getWriter();
 

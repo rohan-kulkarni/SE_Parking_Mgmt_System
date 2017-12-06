@@ -29,7 +29,7 @@ CREATE TABLE `users` (
   `type` varchar(45) COLLATE big5_bin DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=big5 COLLATE=big5_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=big5 COLLATE=big5_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,'hshah2@albany.edu','123456','user'),(3,'hshah@albany.edu','owner','owner'),(4,'apoorva@gmail.com','admin','admin'),(5,'rohank@gmail.com','anon','anonymous'),(8,'rahul@gmail.com','user','owner'),(9,'kush@albany.edu','user','anonymous'),(10,'rohan@yahoo.com','abc','anonymous'),(11,'harnish.cool@gmail.com','123456','owner'),(17,'preet@gmail.com','123456','user'),(22,'harnish@gmail.com','123456','anonymous');
+INSERT INTO `users` VALUES (2,'rkulkarni@albany.edu','ee11cbb19052e40b07aac0ca060c23ee','user'),(3,'hshah2@albany.edu','e10adc3949ba59abbe56e057f20f883e','owner'),(4,'separkingadm@gmail.com','21232f297a57a5a743894a0e4a801fc3','admin'),(5,'rohank@gmail.com','2ae66f90b7788ab8950e8f81b829c947','anonymous'),(8,'preetl@gmail.com','user','owner'),(9,'kush@albany.edu','user','anonymous'),(10,'rohan@yahoo.com','abc','anonymous'),(17,'preet@gmail.com','123456','user'),(22,'harnish@gmail.com','123456','anonymous'),(27,'asd@asd.com','123456','anonymous');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-21 17:21:48
+-- Dump completed on 2017-12-05 20:24:01
