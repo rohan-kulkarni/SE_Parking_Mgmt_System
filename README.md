@@ -47,4 +47,9 @@ check,	amount	check)
 - Parking	owner	listing	
 - Login/registration	links	for	parking	owner	
 - Login/registration	links	for	vehicle	owner	
-- Forgot	password	
+- Forgot	password
+
+
+
+References:
+GUI Template: https://inkthemes.com/wpthemes/car-parking-service-wordpress-theme/
